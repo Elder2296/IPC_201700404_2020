@@ -1,0 +1,75 @@
+﻿@model Proyecto_201700404.Models.USUARIO
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Master/MasterAdmin.cshtml";
+
+    var user = (Proyecto_201700404.Models.USUARIO)Session["user"];
+}
+@try
+{
+    if (user == null)
+    {
+
+    }
+    else
+    {
+        @section encabezado{
+            <label class="text-white">@user.nombre @user.apellido</label>
+        
+         }
+
+    }
+
+}
+catch (Exception)
+{
+
+    throw;
+}
+
+<h1 class="text-white">ADMINISTRACION</h1>
+
+<div class="container cuadro">
+    <div class="row">
+        <div class="col-sm-6 cuadro1">
+            <div class="form-group row" >
+                <svg viewBox="0 0 16 16" class="bi bi-award imgn-config" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M9.669.864L8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193l-1.51-.229L8 1.126l-1.355.702-1.51.229-.684 1.365-1.086 1.072L3.614 6l-.25 1.506 1.087 1.072.684 1.365 1.51.229L8 10.874l1.356-.702 1.509-.229.684-1.365 1.086-1.072L12.387 6l.248-1.506-1.086-1.072-.684-1.365z" />
+                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
+                </svg>
+            </div>
+            <div class="form-group">
+                <button class="form-control btn btn-primary text-white">Torneos</button>
+            </div>
+
+
+
+
+        </div>
+        <div class="col-sm-6 cuadro2">
+            <div class="form-group row">
+
+                <svg viewBox="0 0 16 16" class="bi bi-person-lines-fill imgn-config" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+                </svg>
+            </div>
+            <div class="form-group">
+                <button class="form-control btn btn-primary text-white">Usuarios</button>
+            </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-sm-6 cuadro3">
+            <div class="form-group row">
+
+                <svg width="200px" height="200px" viewBox="0 0 16 16" class="bi bi-bar-chart imgn-config" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5h-2v12h2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
+                </svg>
+            </div>
+            <div class="form-group">
+                <button class="form-control btn btn-primary text-white">Estadisticas</button>
+            </div>
+        </div>
+        <div class="col-sm-6 caudro4"></div>
+    </div>
+</div>
+

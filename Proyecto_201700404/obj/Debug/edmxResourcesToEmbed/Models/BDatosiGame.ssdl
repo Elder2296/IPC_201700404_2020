@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="iGamegtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CIUDAD">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+    </Key>
+    <Property Name="id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_pais" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ColorFicha">
+    <Key>
+      <PropertyRef Name="idcolor" />
+    </Key>
+    <Property Name="idcolor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="color" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Movimiento">
+    <Key>
+      <PropertyRef Name="idMovimiento" />
+      <PropertyRef Name="color" />
+      <PropertyRef Name="fila" />
+      <PropertyRef Name="col" />
+    </Key>
+    <Property Name="idMovimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="color" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="fila" Type="int" Nullable="false" />
+    <Property Name="col" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" />
+    <Property Name="nombreUsuario" Type="varchar" MaxLength="30" />
+    <Property Name="tipoUsuario" Type="varchar" MaxLength="25" />
+    <Property Name="contrasenia" Type="varchar" MaxLength="12" />
+    <Property Name="fechaNac" Type="date" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="id_ciudad" Type="int" />
+  </EntityType>
+  <Association Name="FK__USUARIO__id_ciud__4D94879B">
+    <End Role="CIUDAD" Type="Self.CIUDAD" Multiplicity="0..1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIUDAD">
+        <PropertyRef Name="id_ciudad" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="id_ciudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="iGamegtModelStoreContainer">
+    <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ColorFicha" EntityType="Self.ColorFicha" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movimiento" EntityType="Self.Movimiento" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Movimiento].[idMovimiento] AS [idMovimiento], 
+    [Movimiento].[color] AS [color], 
+    [Movimiento].[fila] AS [fila], 
+    [Movimiento].[col] AS [col]
+    FROM [dbo].[Movimiento] AS [Movimiento]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__USUARIO__id_ciud__4D94879B" Association="Self.FK__USUARIO__id_ciud__4D94879B">
+      <End Role="CIUDAD" EntitySet="CIUDAD" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

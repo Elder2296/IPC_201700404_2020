@@ -1,0 +1,147 @@
+﻿@model Proyecto_201700404.Models.ViewModels.UsuarioViewModel
+@{
+    ViewBag.Title = "Registrar";
+    //List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+    int opcion = ViewBag.verificacion;
+    Layout = "~/Views/Master/MasterHome.cshtml";
+}
+
+
+@using (Html.BeginForm("Registrar", "Home", FormMethod.Post)) {
+    <div class="container well">
+        <style>
+            .blanco {
+                color: white;
+            }
+        </style>
+        <div class="contenedor register">
+            <div class="row">
+                <div class="col-xl-12">
+                    <h2 class="text-white"> Registro</h2>
+
+                </div>
+
+
+            </div>
+            
+            @if (opcion == 1)
+            {
+        <div class="form-group row">
+            <label class="col-sm-12 col-form-label text-center text-white">Usuario ya existente</label>
+
+        </div>
+            }
+            else if (opcion == 0)
+            {
+        <div class="form-group row">
+            <label class="col-sm-12 col-form-label text-center text-white">Error al agregar</label>
+
+        </div>
+            }
+            else if (opcion == 3)
+            {
+        <div class="form-group row">
+            <label class="col-sm-12 col-form-label text-white"></label>
+
+        </div>
+
+            }
+            else { 
+        <div class="form-group row">
+            <label class="col-sm-12 col-form-label text-white"></label>
+
+        </div>
+            }
+
+
+            @*else if (ViewBag.verificicion == 1)
+            {
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-white">Usuario ya existente</label>
+
+                </div>
+            }*@
+
+
+            <div class="form-group row">
+
+                <label class="col-sm-3 col-form-label text-white">Nombre</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(d => d.nombre, null, new { @class = "form-control" })
+                    @*<input name="nombre" type="text" class="form-control" />*@
+                    @Html.ValidationMessageFor(d => d.nombre, null, new { @class = "blanco" })
+
+                </div>
+            </div>
+            <div class="form-group row">
+                @*@Html.LabelFor(d => d.nombre,"",new {@class="col-sm-3 col-form-label text-white"})*@
+                <label class="col-sm-3 col-form-label text-white">Apellido</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(d => d.apellido, null, new { @class = "form-control" })
+                    @*<input name="apellido" type="text" class="form-control" />*@
+                    @Html.ValidationMessageFor(d => d.apellido, null, new { @class = "blanco" })
+
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label class="col-sm-3 col-form-label text-white">Usuario</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(d => d.nombreUsuario, null, new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(d => d.nombreUsuario, null, new { @class = "blanco" })
+
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label class="col-sm-3 col-form-label text-white">Pass</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(d => d.contrasenia, null, new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(d => d.contrasenia, null, new { @class = "blanco" })
+
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label class="col-sm-3 col-form-label text-white">Date</label>
+                <div class="col-sm-9">
+                    @Html.EditorFor(d => d.fechaNac, "", new { @class = "form-control" })<br />
+
+                    @Html.ValidationMessageFor(d => d.fechaNac, null, new { @class = "blanco" })
+
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label class="col-sm-3 col-form-label text-white">Email</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(d => d.email, null, new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(d => d.email, null, new { @class = "blanco" })
+
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label class="col-sm-3 col-form-label text-white">Ciudad</label>
+                <div class="col-sm-9">
+
+
+                    @Html.DropDownListFor(d => d.id_ciudad, new SelectList(Model.ciudades, "id_ciudad", "nombre_pais"), "Selecione pais", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.id_ciudad, null, new { @class = "blanco" })
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <button value="Registrar" type="submit" class="form-control btn btn-primary" >Registrar</button>
+
+            </div>
+
+        </div>
+        
+
+
+    </div>
+}

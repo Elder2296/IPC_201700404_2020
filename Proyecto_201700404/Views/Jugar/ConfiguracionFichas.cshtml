@@ -1,0 +1,60 @@
+﻿@model Proyecto_201700404.Models.ViewModels.Elegirfichas
+@using Proyecto_201700404.Models
+@{
+    ViewBag.Title = "ConfiguracionFichas";
+    Layout = "~/Views/Master/CampodeJuego.cshtml";
+    Proyecto_201700404.Models.USUARIO user = (Proyecto_201700404.Models.USUARIO)Session["user"];
+    iGamegtEntities1 db = new iGamegtEntities1();
+}
+
+@using (Html.BeginForm("ConfiguracionFichas","Jugar",FormMethod.Post)) { 
+
+
+    <div style="border-radius:10px; width:600px; height:50%; position:absolute; top:60%; left:50%; transform:translate(-47%,-50%); background-color:rgba(0, 0, 0,.8)">
+        <div style="margin-left:50%; margin-top:7%; width:25%; height:12%; transform:translate(-50%,-50%);" class="">
+            <label style=" font-family:'Agency FB';font-size:30px;" class="text-white">CONFIGURACION </label>
+
+        </div>
+        <div style=" margin-left:50%; margin-top:20%; width:50%;height:80%;transform:translate(-50%,-50%); " class="">
+            <p class="text-center text-white">
+                Antes de iniciar la partida el usuario y el invitado deben elegin el color de sus fichas.
+
+            </p>
+
+
+            <div class="form-group row">
+
+                <label class="col-sm-4 col-form-label text-white"> @user.nombreUsuario :</label>
+                <div class="col-sm-8">
+                    
+                    @Html.DropDownListFor(d =>d.idcolor1,new SelectList(db.ColorFicha,"idcolor","color"),"Selecione color",new { @class="form-control"})
+
+                    @*@Html.DropDownListFor(d => d.id_ciudad, new SelectList(Model.ciudades, "id_ciudad", "nombre_pais"), "Seleciones pais", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.id_ciudad, null, new { @class = "blanco" })*@
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <label class="col-sm-4 col-form-label text-white"> Invitado:</label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(d => d.idcolor2, new SelectList(db.ColorFicha, "idcolor", "color"), "Selecione color", new { @class = "form-control" })
+
+
+                    @*@Html.DropDownListFor(d => d.id_ciudad, new SelectList(Model.ciudades, "id_ciudad", "nombre_pais"), "Seleciones pais", new { @class = "form-control" })
+        @Html.ValidationMessageFor(d => d.id_ciudad, null, new { @class = "blanco" })*@
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <button value="Ir a partida" type="submit" class="form-control btn btn-primary">Ir a partida</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+}

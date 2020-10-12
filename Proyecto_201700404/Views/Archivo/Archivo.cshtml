@@ -1,0 +1,58 @@
+﻿@model Proyecto_201700404.Models.ViewModels.ArchivoViewModel
+@{
+    ViewBag.Title = "Archivo";
+    Layout = "~/Views/Master/MasterPlayer.cshtml";
+}
+
+<h2>Archivo</h2>
+@if (ViewBag.Message!=null) {
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+
+    </div>
+}
+
+@using (Html.BeginForm("Guardar", "Archivo", FormMethod.Post, new { enctype = "multipart/form-data"
+}))
+{
+    @Html.AntiForgeryToken();
+<div class="row">
+    <div class="col-md-6 col-lg-offset-3">
+        <div class="form-group">
+            @Html.LabelFor(d => d.CargarArchivo)
+            @Html.TextBoxFor(d => d.CargarArchivo, new { @class = "form-control", type = "file", accept = ".xml" })
+            @Html.ValidationMessageFor(d => d.CargarArchivo, "", new { @class = "text-danger" })
+
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(d => d.cadena)
+            @Html.TextBoxFor(d => d.cadena, new { @class = "form-control"})
+            @Html.ValidationMessageFor(d => d.cadena, "", new { @class = "text-danger" })
+
+
+        </div>
+        <div class="form-group" style="text-align:right">
+            <input type="submit" class="btn btn-success" value="Guardar">
+
+        </div>
+
+
+    </div>
+</div>
+}
+
+@if (ViewBag.listafichas == null)
+{
+    <label>No se puede mostrar esta mierda porque esta null</label>
+}
+else {
+    foreach (Proyecto_201700404.Models.ViewModels.Ficha item in ViewBag.listafichas)
+    {
+       <div class="row">
+           <label class="bg-primary text-white">@item.color  @item.columna  @item.fila</label>
+
+       </div>
+
+    }
+}

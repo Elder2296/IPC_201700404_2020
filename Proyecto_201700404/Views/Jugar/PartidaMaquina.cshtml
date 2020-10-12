@@ -1,0 +1,61 @@
+﻿@model Proyecto_201700404.Models.ViewModels.MovimientoViewModel
+@{
+    Layout = null;
+}
+
+
+@{
+    ViewBag.Title = "PartidaMaquina";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Content/Tablerocss.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body class="variable">
+    @using (Ajax.BeginForm("PartidaMaquina", "Jugar", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "tablero_juego" }))
+    {
+
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+
+
+                        <li class="nav-item ">
+                            <a class="nav-link active text-white btn btn-danger" href="#" tabindex="-1" aria-disabled="true">Iniciar Juego</a>
+                        </li>
+
+                    </ul>
+
+                    <form class="form-inline my-2 my-lg-0">
+                        <button class="btn btn-warning my-2 my-sm-0 btn-lg">Guardar Partida</button>
+                        <button class="btn btn-dark my-2 my-sm-0 btn-lg">Regresar</button>
+
+
+                    </form>
+                </div>
+
+
+            </div>
+
+
+        </nav>
+
+
+
+    }
+
+    <div id="tablero_juego">
+        @Html.Partial("Tablero", Model)
+
+    </div>
+    @Scripts.Render("~/bundles/ajax")
+</body>
+</html>

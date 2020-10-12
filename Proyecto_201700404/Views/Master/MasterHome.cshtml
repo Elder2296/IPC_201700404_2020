@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Home</title>
+    
+    <link href="~/Content/MasterHome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+                <div class="container">
+                    <a class="navbar-brand text-white " hrer="#">i GAMEGT</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#">Rules</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" href="#" tabindex="-1" aria-disabled="true">Start Game</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" href="#" tabindex="-1" aria-disabled="true">Championship</a>
+                            </li>
+                        </ul>
+                        
+                        <form class="form-inline my-2 my-lg-0">
+                            <button class="btn btn-warning my-2 my-sm-0 btn-lg"> @Html.ActionLink("Sing in", "Registrar")</button>
+                            <button class="btn btn-dark my-2 my-sm-0 btn-lg">@Html.ActionLink("Login", "Login")</button>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </nav>
+
+        </header>
+
+    </div>
+    <div class="variable">
+        @RenderBody()
+    </div>
+    @section scripts {
+
+        <script>
+            $('#verPassword').on('mousedown', function () {
+                $('#Password').attr("type", "text");
+            });
+
+            $('#verPassword').on('mouseup mouseleave', function () {
+                $('#Password').attr("type", "password");
+            });
+        </script>
+    }
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

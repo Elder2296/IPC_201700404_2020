@@ -1,0 +1,215 @@
+﻿@{ 
+    var lista = Proyecto_201700404.Controllers.Contenedor_.movimientos;
+
+}
+<div class="container">
+    <div class="row" id="tablero">
+        <div class="col-2">
+            <table class="table table-sm table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Movimientos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            Jugador1:
+                        </th>
+                        <th>3</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Invitado:
+                        </th>
+                        <th>5</th>
+                    </tr>
+
+                </tbody>
+
+            </table>
+            
+
+        </div>
+        <div class="col-8">
+            <div class="cuadrojuego">
+                <div class="row" >
+
+                    @for (int fil = 0; fil < 10; fil++)
+                    {
+                        for (int col = 0; col < 10; col++)
+                        {
+                            if (fil == 0 && col > 0)
+                            {
+                                <div style="font-size:35px;" class="col btn btn-dark border casilla " disabled="true">@letra(col)</div>
+                            }
+                            else if (fil > 0 && fil < 9 && col == 0)
+                            {
+
+                                <div style="font-size:35px;" class="col btn btn-dark border casilla" disabled="true">@fil</div>
+                            }
+                            else if (fil == 9 && col >= 0)
+                            {
+
+                                <div style="font-size:35px;" class="col btn btn-dark border casilla" disabled="true">@letra(col)</div>
+
+                            }
+                            else if (fil != 0 && col == 9)
+                            {
+                                <div style="font-size:35px;" class="col btn btn-dark border casilla" disabled="true">@fil</div>
+                            }
+                            else if (fil == 0 && col == 0)
+                            {
+                                <div style="font-size:35px;" class="col btn btn-dark border casilla" disabled="true">@letra(col)</div>
+
+                            }
+
+
+                            else
+                            {
+
+
+
+
+                                <div class="col btn btn-success border casilla" id="@fil.ToString()-@col.ToString()">
+
+                                    @if (lista == null)
+                                    {
+
+
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in lista)
+                                        {
+                                            if (item.col == col && item.fila == fil)
+                                            {
+
+                                                if (item.color == "blanco")
+                                                {
+                                                    <button class="ficha bg-white"></button>
+
+                                                }
+                                                else if (item.color == "negro")
+                                                {
+
+                                                    <button class="ficha bg-dark"></button>
+                                                }
+
+                                            }
+
+
+
+                                        }
+                                    }
+
+
+                                </div>
+
+
+
+                            }
+
+
+                        }
+                        <div class="w-100"></div>
+
+
+                    }
+                </div>
+
+            </div>
+        </div>
+        <div class="col-2 ">
+            <div style="height:40%; border-radius:5px;" class="bg-dark">
+                <div class="row  justify-content-md-center">
+                    <label style=" font-family:'Agency FB';font-size:50px;" class="text-white">Turno de:</label>
+                </div>
+                <div class="row justify-content-md-center ">
+                    <p style=" font-family:'Agency FB';font-size:30px;" class="text-white">
+                        @TempData["jugador"]
+                    </p>
+                </div>
+                <div class="row justify-content-md-center  ">
+                    <div style="width:50%; height:85px;" class="btn btn-success border">
+                        @if (TempData["jugador"] == "Invitado")
+                        {
+                            <button class="ficha bg-dark"></button>
+                        }
+                        else
+                        {
+                            <button class="ficha bg-white"></button>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+            $("#tablero div ").on("click", function (event) {
+                var divId = $(this).attr("id");
+
+                $.ajax({
+                    url: "@Url.Action("PartidaMaquina")",
+                    type: "Post",
+                    data: { idcelda: divId },
+                    success: function (data) {
+                        //alert(data);
+                        $("#tablero").html(data);
+
+                    }
+                });
+
+
+
+
+            });
+</script>
+
+@{
+
+    string letra(int col)
+    {
+        string l = "";
+        switch (col)
+        {
+            case 1:
+                l = "A";
+                break;
+            case 2:
+                l = "B";
+                break;
+            case 3:
+                l = "C";
+                break;
+            case 4:
+                l = "D";
+                break;
+            case 5:
+                l = "E";
+                break;
+            case 6:
+                l = "F";
+                break;
+            case 7:
+                l = "G";
+                break;
+            case 8:
+                l = "H";
+                break;
+
+        }
+
+        return l;
+
+    }
+}

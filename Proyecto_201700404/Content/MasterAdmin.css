@@ -1,0 +1,50 @@
+﻿.variable {
+height:100%;
+}
+
+.variable {
+    background-image: url('../src/img/fondo8.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: aquamarine;
+}
+h1 {
+    text-align:center;
+}
+.difuminado1 {
+    background-color: rgba(0, 0, 0,.50);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.difuminado2 {
+    background-color: rgba(0, 0, 0,.8);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.principal {
+    margin-top:20px;
+    height:100%;
+
+}
+.cuadro {
+    padding:30px;
+    margin:auto;
+}
+a {
+    text-size-adjust:80%;
+}
+.caudro1,cuadro4 {
+    background-color:aqua;
+
+}
+.imgn-config {
+    margin:auto;
+    width:60%;
+    height:200px;
+    color:white;
+
+}

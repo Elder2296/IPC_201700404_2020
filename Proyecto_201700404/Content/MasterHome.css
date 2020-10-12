@@ -1,0 +1,57 @@
+﻿.variable {
+    height:100vh;
+}
+.variable {
+    background-image: url('../src/img/game.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: aquamarine;
+}
+.principal {
+
+    height: 100%;
+}
+.blanco {
+    color:white;
+}
+h1,h2 {
+    text-align:center;
+}
+.imgn-config {
+    width:600px;
+    height: 300px;
+    margin-left: auto;
+    margin-top: 130px;
+    margin-left:60px;
+    border-radius: 10px;
+    box-shadow: #000000 5px 5px 10px;
+}
+.espacio {
+    border-radius: 10px;
+    margin-top: 80px;
+    background-color: rgba(255, 255, 255,.6);
+    box-shadow: #000000 5px 5px 10px;
+}
+.contenedor {
+    
+    
+    width: 50%;
+    margin: auto;
+    margin-top:auto;
+    padding: 15px;
+    border: 5px;
+}
+.register {
+    border-radius: 20px;
+    background-color: rgba(0,0,0,.9)
+}
+.espacio2 {
+    margin-top: 150px;
+    margin-bottom: auto;
+    
+}
+
+
+

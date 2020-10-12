@@ -1,0 +1,75 @@
+﻿@model Proyecto_201700404.Models.ViewModels.UsuarioViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Master/MasterHome.cshtml";
+    int entro = ViewBag.verificacion;
+}
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post)) {
+
+    <div class="container well">
+        <div class="contenedor ">
+            <div class="espacio2 ">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <h2 class="text-white"> Login</h2>
+
+                    </div>
+                    @if (entro == 1)
+                    {
+                        <div class="container row">
+                            <label class="text-white">@ViewBag.Error</label>
+
+                        </div>
+                    }
+
+
+
+                </div>
+                <style>
+                    .blanco {
+                        color:white;
+                    }
+                </style>
+                <div class="form-group row">
+                    @*@Html.LabelFor(d => d.nombre,"",new {@class="col-sm-3 col-form-label text-white"})*@
+                    <label class="col-sm-3 col-form-label text-white">Usuario</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(d => d.nombreUsuario, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(d => d.nombreUsuario, null, new { @class = "blanco" })
+                        @*<input type="text" class="form-control" />*@
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @*@Html.LabelFor(d => d.nombre,"",new {@class="col-sm-3 col-form-label text-white"})*@
+                    <label class="col-sm-3 col-form-label text-white">Contraseña</label>
+                    <div class="col-sm-9">
+                        @Html.PasswordFor(d => d.contrasenia, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(d => d.contrasenia, null, new { @class = "blanco" })
+                        <span class="input-group-btn">
+                            <button id="verPassword" class="btn btn-default" type="button">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </button>
+                        </span>
+                        
+                        @*<input type="password" class="form-control" /*@>
+
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    
+                    <button value="Ingresar" type="submit" class="form-control btn btn-primary">Ingresar</button>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+    }

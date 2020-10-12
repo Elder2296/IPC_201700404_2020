@@ -1,0 +1,80 @@
+﻿.variable {
+    height: 100%;
+}
+
+.variable {
+    background-image: url('../src/img/fondo8.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: aquamarine;
+}
+.cuadrojuego {
+    margin:auto;
+    
+    width:100vh;
+    height:100vh;
+    background-color: rgba(25,25,25,.5);
+}
+.casilla {
+    
+    height:65px;
+}
+.dimensiones {
+    height:100%;
+    width:100%
+
+
+}
+.ficha {
+    height:100%;
+    width:100%;
+    border-radius:100%!important;
+    
+    
+    border-color:black;
+
+}
+.encabezado {
+
+    font-size:100%;
+}
+.datos {
+    width:20px;
+    height:200px;
+    background-color:aquamarine;
+
+}
+
+.formdatos {
+    width:20px;
+    height:40px;
+    background-color:brown;
+}
+
+.titulo {
+    font-size:70px;
+    font-family:'Times New Roman', Times, serif;
+
+
+}
+.descripcion {
+
+    font-size:25px;
+    font-family:'Times New Roman', Times, serif;
+
+    
+}
+
+.cuadro {
+    padding:10px;
+    border-radius:20px;
+    background-color: rgba(5, 5, 5,.5);
+
+}
+.elder {
+    margin-top:30px;
+
+}
+
