@@ -130,6 +130,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clases\Casilla.cs" />
+    <Compile Include="Clases\Control.cs" />
+    <Compile Include="Clases\Ficha.cs" />
+    <Compile Include="Clases\Posibilidad.cs" />
+    <Compile Include="Clases\Variables.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ArchivoController.cs" />
     <Compile Include="Controllers\Contenedor.cs" />

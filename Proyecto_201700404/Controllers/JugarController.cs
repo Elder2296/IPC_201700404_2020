@@ -5,14 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using Proyecto_201700404.Models;
 using Proyecto_201700404.Models.ViewModels;
+using Proyecto_201700404.Clases;
 
 namespace Proyecto_201700404.Controllers
 {
     public class JugarController : Controller
     {
         // GET: Jugar
-        public static List<MovimientoViewModel> movimientos = new List<MovimientoViewModel>();
-        public static int turno = 0;
+        //public static List<Ficha> fichas = new List<Ficha>();
+        //public static int turno = 0;
         public ActionResult Jugar()
         {
             return View();
@@ -41,10 +42,10 @@ namespace Proyecto_201700404.Controllers
                 else {
                     turno = 2;
                 }
-                Contenedor_.turno = turno;
+                Variables.turno = turno;
                 System.Diagnostics.Debug.WriteLine("El turno le corresponde al: " + turno);
 
-                Contenedor_.Iniciarlista();
+                Variables.fichasbasicas();
                 return RedirectToAction("PartidaMaquina");                   
                 
             }
@@ -56,7 +57,8 @@ namespace Proyecto_201700404.Controllers
         }
         public ActionResult PartidaMaquina() {
             string jugador = "";
-            if (Contenedor_.turno == 1)
+            if (Variables.turno == 1)  //mostrata de quien sera el turno en la vista
+
             {
                 Proyecto_201700404.Models.USUARIO user = (Proyecto_201700404.Models.USUARIO)Session["user"];
                 jugador = user.nombreUsuario;
@@ -73,7 +75,7 @@ namespace Proyecto_201700404.Controllers
         public ActionResult PartidaMaquina(string idcelda) {
             System.Diagnostics.Debug.WriteLine(idcelda);
             string jugador = "";
-            if (Contenedor_.turno == 1)
+            if (Variables.turno == 1)
             {
                 Proyecto_201700404.Models.USUARIO user = (Proyecto_201700404.Models.USUARIO)Session["user"];
                 jugador = user.nombreUsuario;
@@ -98,40 +100,40 @@ namespace Proyecto_201700404.Controllers
                     int fil = int.Parse(datos[0]);
                     int colum = int.Parse(datos[1]);
 
-                    if (Contenedor_.VerificarExistencia(fil, colum))
-                    {
-                    }
-                    else
-                    {
+                    //if (Contenedor_.VerificarExistencia(fil, colum))
+                    //{
+                    //}
+                    //else
+                    //{
 
 
                     
 
-                        System.Diagnostics.Debug.WriteLine(fil);
-                        System.Diagnostics.Debug.WriteLine(colum);
+                    //    System.Diagnostics.Debug.WriteLine(fil);
+                    //    System.Diagnostics.Debug.WriteLine(colum);
 
-                        MovimientoViewModel movimiento = new MovimientoViewModel();
-                        movimiento.fila = fil;
-                        movimiento.col = colum;
+                    //    MovimientoViewModel movimiento = new MovimientoViewModel();
+                    //    movimiento.fila = fil;
+                    //    movimiento.col = colum;
 
-                        if (Contenedor_.turno == 1)
-                        {
-                            movimiento.color = "blanco";
+                    //    if (Contenedor_.turno == 1)
+                    //    {
+                    //        movimiento.color = "blanco";
 
-                            Contenedor_.turno = 2;
-
-
-                        }
-                        else if (Contenedor_.turno == 2)
-                        {
-                            movimiento.color = "negro";
-
-                            Contenedor_.turno = 1;
+                    //        Contenedor_.turno = 2;
 
 
-                        }
-                        Contenedor_.movimientos.Add(movimiento);
-                    }
+                    //    }
+                    //    else if (Contenedor_.turno == 2)
+                    //    {
+                    //        movimiento.color = "negro";
+
+                    //        Contenedor_.turno = 1;
+
+
+                    //    }
+                    //    Contenedor_.movimientos.Add(movimiento);
+                    //}
 
 
 
@@ -141,59 +143,10 @@ namespace Proyecto_201700404.Controllers
 
 
 
-            //string celda = fil.ToString() + "%%" + colum.ToString();
-
-            //if (idcelda == null)
-            //{
-
-            //}
-            //else
-            //{
-
-            //        char sep = '-';
-            //        string[] datos = idcelda.Split(sep);
-            //        int fil = int.Parse(datos[0]);
-            //        int colum = int.Parse(datos[1]);
-            //        MovimientoViewModel movimiento = new MovimientoViewModel();
-
-            //        if (Contenedor_.turno == 1)
-            //        {
-            //            movimiento.color = "blanco";
-            //            movimiento.fila = fil;
-            //            movimiento.col = colum;
-            //            Contenedor_.turno = 2;
-            //            Contenedor_.movimientos.Add(movimiento);
-
-            //        }
-            //        else if (Contenedor_.turno == 2)
-            //        {
-            //            movimiento.color = "negro";
-            //            movimiento.fila = fil;
-            //            movimiento.col = colum;
-            //            Contenedor_.turno = 1;
-
-            //            Contenedor_.movimientos.Add(movimiento);
-            //        }
-
-
-
-
-            //}
-
-
-
-
-
-
-
-            //MovimientoViewModel mov = new MovimientoViewModel();
-
-
-            //idcelda += " es la celdad seleccionada. ";
-            //iGamegtEntities1 BD = new iGamegtEntities1();
+            
 
             @TempData["jugador"] = jugador;
-            return PartialView("Tablero", Contenedor_.movimientos);
+            return PartialView("Tablero"/*, Contenedor_.movimientos*/);
             //return Json(celda, JsonRequestBehavior.AllowGet);
         }
 

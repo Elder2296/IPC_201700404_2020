@@ -7,7 +7,11 @@ namespace Proyecto_201700404.Clases
 {
     public class Casilla
     {
-        public Boolean ocupado { set; get; }
+        public Casilla() {
+            estado = "desocupado";
+        }
+        public string estado  { set;get; }
+        public string valor { set; get; }
 
     }
 }
