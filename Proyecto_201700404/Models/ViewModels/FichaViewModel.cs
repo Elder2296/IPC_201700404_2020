@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Proyecto_201700404.Models.ViewModels
 {
-    public class Ficha
+    public class FichaViewModel
     {
         public string color { get; set; }
         public int columna { get; set; }

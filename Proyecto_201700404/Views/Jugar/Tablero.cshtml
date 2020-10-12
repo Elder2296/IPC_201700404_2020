@@ -1,5 +1,6 @@
 ﻿@{ 
     var lista = Proyecto_201700404.Clases.Variables.fichas;
+    var valides = Proyecto_201700404.Clases.Variables.valides;
 
 }
 <div class="container">
@@ -23,6 +24,33 @@
                             Invitado:
                         </th>
                         <th>5</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Valides de la Jugada
+                        </th>
+
+                    </tr>
+
+                    <tr>
+                        
+                            @if (valides == 0) {
+                                <th>
+                                    Aun no empieza la partida
+                                </th>
+
+                            } else if (valides == 1) {
+                    <th>
+                        La jugada es valida @TempData["valides"]
+                    </th>
+                            } else if (valides==2) {
+                    <th>
+                        La jugada es invalida @TempData["valides"]
+                    </th>
+                            
+                            }
+
+
                     </tr>
 
                 </tbody>
@@ -134,11 +162,11 @@
                     <div style="width:50%; height:85px;" class="btn btn-success border">
                         @if (TempData["jugador"] == "Invitado")
                         {
-                            <button class="ficha bg-dark"></button>
+                            <button class="ficha bg-white"></button>
                         }
                         else
                         {
-                            <button class="ficha bg-white"></button>
+                            <button class="ficha bg-dark"></button>
                         }
                     </div>
                 </div>

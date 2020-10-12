@@ -32,13 +32,25 @@ namespace Proyecto_201700404.Clases
                     this.PosibilidadXIzquierda(item);
                     this.posibilidadXAbajo(item);
                     this.buscarXArriba(item);
-                    this.diagonalDerechaInferior(item);
-                    this.diagonalIzquierdaInferior(item);
-                    this.diagonalSuperiorDerecha(item);
-                    this.diagonalSuperiorIzquierda(item);
+                    //this.diagonalDerechaInferior(item);
+                    //this.diagonalIzquierdaInferior(item);
+                    //this.diagonalSuperiorDerecha(item);
+                    //this.diagonalSuperiorIzquierda(item);
                 }
             }
 
+        }
+        public void mostraTabla() {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    System.Diagnostics.Debug.Write(Variables.tablero[i,j].estado+"       ");
+
+                }
+                System.Diagnostics.Debug.WriteLine("");
+
+            }
         }
 
         public void PosibilidadXDerecha(Ficha fichaelegida)
@@ -46,6 +58,7 @@ namespace Proyecto_201700404.Clases
             //Console.WriteLine("Entro a buscar posibilidades por la derecha");
 
             Posibilidad posibilidad = new Posibilidad();
+            int parar = 1;
 
             for (int i = 0; i < 8; i++)
             {
@@ -65,17 +78,30 @@ namespace Proyecto_201700404.Clases
                                 //Console.WriteLine("hay una ficha color: " + this.buscarFicha(i, j).color + " fila: " + this.buscarFicha(i, j).fila + "  columna: " + this.buscarFicha(i, j).columna);
                                 //posibilidad.getLista().Add(this.buscarFicha(i,j));
                                 posibilidad.getLista().Add(this.buscarFicha(i, j));
-                                if (Variables.tablero[i, j + 1] != null && Variables.tablero[i, j + 1].estado == "desocupado" && Variables.tablero[i, j - 1].estado == "ocupado")
-                                //si la casilla de a la par existe y esta desocupado                                
-                                {
-                                    posibilidad.origen = fichaelegida;
-                                    posibilidad.Fila = i + 1;
-                                    posibilidad.Columna = j + 2;
-                                    lista_posibilidades.Add(posibilidad);
+                                //System.Diagnostics.Debug.WriteLine(Variables.tablero[i,j].estado);
+                                //System.Diagnostics.Debug.WriteLine("fila: "+i+" columna:  "+j );
+                                
 
+                                if ((j + 1) < 8) {
+                                    //System.Diagnostics.Debug.WriteLine("el siguiente tiene estado:  " + Variables.tablero[i, j + 1].estado);
+                                    if (Variables.tablero[i, j + 1] != null && Variables.tablero[i, j + 1].estado == "desocupado" && Variables.tablero[i, j - 1].estado == "ocupado")
+                                    //si la casilla de a la par existe y esta desocupado                                
+                                    {
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i + 1;
+                                        posibilidad.Columna = j + 2;
+                                        //System.Diagnostics.Debug.WriteLine("hay una posibilidad en fila: "+posibilidad.Fila+"  columna: "+posibilidad.Columna);
+                                        lista_posibilidades.Add(posibilidad);
+                                        parar = 2;
+                                        break;
 
+                                    }
 
                                 }
+
+                                
+
+                                
 
 
                             }
@@ -90,6 +116,9 @@ namespace Proyecto_201700404.Clases
 
                     }
                 }
+                if (parar!=1) {
+                    break;
+                }
 
             }
 
@@ -99,6 +128,8 @@ namespace Proyecto_201700404.Clases
         public void PosibilidadXIzquierda(Ficha fichaelegida)
 
         {
+
+            int parar = 1;
             Posibilidad posibilidad = new Posibilidad();
             for (int i = 0; i < 8; i++)
             {
@@ -118,17 +149,23 @@ namespace Proyecto_201700404.Clases
                                 //    Console.WriteLine("hay una ficha color: " + this.buscarFicha(i, j).color + " fila: " + this.buscarFicha(i, j).fila + "  columna: " + this.buscarFicha(i, j).columna);
 
                                 posibilidad.getLista().Add(this.buscarFicha(i, j));
-                                if (Variables.tablero[i, j - 1] != null && Variables.tablero[i, j - 1].estado == "desocupado" && Variables.tablero[i, j + 1].estado == "ocupado")
-                                //si la casilla de a la par existe y esta desocupado                                
-                                {
-                                    posibilidad.origen = fichaelegida;
-                                    posibilidad.Fila = i + 1;
-                                    posibilidad.Columna = j;
-                                    lista_posibilidades.Add(posibilidad);
+                                if ((j-1)>=0) {
 
+                                    if (Variables.tablero[i, j - 1] != null && Variables.tablero[i, j - 1].estado == "desocupado" && Variables.tablero[i, j + 1].estado == "ocupado")
+                                    //si la casilla de a la par existe y esta desocupado                                
+                                    {
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i + 1;
+                                        posibilidad.Columna = j;
+                                        lista_posibilidades.Add(posibilidad);
+                                        parar = 2;
+                                        break;
 
+                                    }
 
                                 }
+                                
+                                
 
 
                             }
@@ -144,6 +181,9 @@ namespace Proyecto_201700404.Clases
                     }
 
                 }
+                if (parar!=1) {
+                    break;
+                }
 
             }
         }
@@ -151,6 +191,8 @@ namespace Proyecto_201700404.Clases
 
         public void posibilidadXAbajo(Ficha fichaelegida)
         {
+
+            int parar = 1;
             Posibilidad posibilidad = new Posibilidad();
             int auxfila = fichaelegida.fila - 1;
             int auxcol = fichaelegida.columna - 1;
@@ -173,15 +215,20 @@ namespace Proyecto_201700404.Clases
 
 
                                 posibilidad.getLista().Add(this.buscarFicha(i, j));
+                                if ((i+1)<8) {
+                                    if (Variables.tablero[i + 1, j] != null && Variables.tablero[i + 1, j].estado == "desocupado" && Variables.tablero[i - 1, j].estado == "ocupado")
+                                    {
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i + 2;
+                                        posibilidad.Columna = j + 1;
+                                        lista_posibilidades.Add(posibilidad);
+                                        parar = 2;
+                                        break;
+                                    }
 
-                                if (Variables.tablero[i + 1, j] != null && Variables.tablero[i + 1, j].estado == "desocupado" && Variables.tablero[i - 1, j].estado == "ocupado")
-                                {
-                                    posibilidad.origen = fichaelegida;
-                                    posibilidad.Fila = i + 2;
-                                    posibilidad.Columna = j + 1;
-                                    lista_posibilidades.Add(posibilidad);
 
                                 }
+                                
 
                             }
 
@@ -196,12 +243,16 @@ namespace Proyecto_201700404.Clases
 
                     }
                 }
+                if (parar!=1) {
+                    break;
+                }
             }
         }
 
 
         public void buscarXArriba(Ficha fichaelegida)
         {
+            int parar = 1;
             Posibilidad posibilidad = new Posibilidad();
             for (int i = 7; i >= 0; i--)
             {
@@ -220,14 +271,20 @@ namespace Proyecto_201700404.Clases
 
                                 //Console.WriteLine("hay una ficha color: " + this.buscarFicha(i, j).color + " fila: " + this.buscarFicha(i, j).fila + "  columna: " + this.buscarFicha(i, j).columna);
                                 posibilidad.getLista().Add(this.buscarFicha(i, j));
+                                if ((i-1)>=0) {
+                                    if (Variables.tablero[i - 1, j] != null && Variables.tablero[i - 1, j].estado == "desocupado" & Variables.tablero[i + 1, j].estado == "ocupado")
+                                    {
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i;
+                                        posibilidad.Columna = j + 1;
+                                        lista_posibilidades.Add(posibilidad);
+                                        parar = 2;
+                                        break;
+                                    }
 
-                                if (Variables.tablero[i - 1, j] != null && Variables.tablero[i - 1, j].estado == "desocupado" & Variables.tablero[i + 1, j].estado == "ocupado")
-                                {
-                                    posibilidad.origen = fichaelegida;
-                                    posibilidad.Fila = i;
-                                    posibilidad.Columna = j + 1;
-                                    lista_posibilidades.Add(posibilidad);
+
                                 }
+                                
 
                             }
 
@@ -240,6 +297,9 @@ namespace Proyecto_201700404.Clases
 
                     }
 
+                }
+                if (parar!=1) {
+                    break;
                 }
 
             }
@@ -599,6 +659,35 @@ namespace Proyecto_201700404.Clases
 
 
         }
+        public void buscarfichaParavoltear(Ficha fichaelegida) {//la ficha que se coloco, pertenece a las posibilidades de juego
+
+            foreach (var item in lista_posibilidades)
+            {
+                if (item.Fila==fichaelegida.fila && item.Columna==fichaelegida.columna) {//se ubica en la ficha que se agreggo
+                    foreach (var item2 in item.getLista())//busca la fichas que volteara esa posibilidad
+                    {
+                        this.voltearFichas(item2, fichaelegida);
+
+                    }
+                }
+
+            }
+        
+        }
+        public void voltearFichas(Ficha fichaavoltear,Ficha fichacolocada) {
+            foreach (var item in Variables.fichas)
+            {
+                if (item.columna==fichaavoltear.columna && item.fila==fichaavoltear.fila) {
+                    if (item.color!=fichacolocada.color) {
+                        item.color = fichacolocada.color;
+                    }
+                    
+                }
+
+            }
+            
+        }
+
 
 
 

@@ -176,7 +176,7 @@
     <Compile Include="Models\ViewModels\CiudadViewModel.cs" />
     <Compile Include="Models\ViewModels\ColorFichaViewModel.cs" />
     <Compile Include="Models\ViewModels\Elegirfichas.cs" />
-    <Compile Include="Models\ViewModels\Ficha.cs" />
+    <Compile Include="Models\ViewModels\FichaViewModel.cs" />
     <Compile Include="Models\ViewModels\MovimientoViewModel.cs" />
     <Compile Include="Models\ViewModels\UsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
