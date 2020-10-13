@@ -161,7 +161,7 @@ namespace Proyecto_201700404.Controllers
                     }
                     if (encontro == 1)
                     {//la posicion ingresada si es valida 
-
+                        Variables.mov_jugador1 = Variables.mov_jugador1 + 1;
                         Variables.valides = 1;
                         @TempData["valides"] = TempData["jugador"];
                         control.buscarfichaParavoltear(ficha);//voltea las fichas
@@ -205,6 +205,7 @@ namespace Proyecto_201700404.Controllers
 
                     if (encontro == 1)
                     {
+                        Variables.mov_jugador2 = Variables.mov_jugador2 + 1;
                         Variables.valides = 1;
                         @TempData["valides"] = TempData["jugador"];
                         control2.buscarfichaParavoltear(ficha);

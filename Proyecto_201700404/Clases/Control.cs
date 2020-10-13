@@ -32,10 +32,12 @@ namespace Proyecto_201700404.Clases
                     this.PosibilidadXIzquierda(item);
                     this.posibilidadXAbajo(item);
                     this.buscarXArriba(item);
-                    //this.diagonalDerechaInferior(item);
-                    //this.diagonalIzquierdaInferior(item);
-                    //this.diagonalSuperiorDerecha(item);
-                    //this.diagonalSuperiorIzquierda(item);
+
+
+                    this.diagonalDerechaInferior(item);
+                    this.diagonalIzquierdaInferior(item);
+                    this.diagonalSuperiorDerecha(item);
+                    this.diagonalSuperiorIzquierda(item);
                 }
             }
 
@@ -344,16 +346,22 @@ namespace Proyecto_201700404.Clases
                             if (fichaelegida.color != this.buscarFicha(i, j).color)
                             {
                                 posibilidad.getLista().Add(this.buscarFicha(i, j));
-                                if (Variables.tablero[i + 1, j + 1] != null && Variables.tablero[i + 1, j + 1].estado == "desocupado")
-                                {
+                                if ((i+1)<8 && (j+1)<8) {
+                                    if (Variables.tablero[i + 1, j + 1] != null && Variables.tablero[i + 1, j + 1].estado == "desocupado")
+                                    {
 
 
-                                    posibilidad.origen = fichaelegida;
-                                    posibilidad.Fila = i + 2;
-                                    posibilidad.Columna = j + 2;
-                                    lista_posibilidades.Add(posibilidad);
-                                    frenar = 2;
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i + 2;
+                                        posibilidad.Columna = j + 2;
+                                        lista_posibilidades.Add(posibilidad);
+                                        frenar = 2;
+                                    }
+
+
                                 }
+
+                                
 
 
                             }
@@ -452,17 +460,25 @@ namespace Proyecto_201700404.Clases
                             {
 
                                 posibilidad.getLista().Add(this.buscarFicha(i, j));
-                                if (Variables.tablero[i + 1, j - 1] != null && Variables.tablero[i + 1, j - 1].estado == "desocupado")
-                                {
-                                    //Console.WriteLine(" paso aca entro a fila: " + i + "  columna: " + j);
 
-                                    posibilidad.origen = fichaelegida;
-                                    posibilidad.Fila = i + 2;
-                                    posibilidad.Columna = j;
-                                    lista_posibilidades.Add(posibilidad);
+                                if ((i+1)<8 && (j-1)>=0) {
+
+                                    if (Variables.tablero[i + 1, j - 1] != null && Variables.tablero[i + 1, j - 1].estado == "desocupado")
+                                    {
+                                        //Console.WriteLine(" paso aca entro a fila: " + i + "  columna: " + j);
+
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i + 2;
+                                        posibilidad.Columna = j;
+                                        lista_posibilidades.Add(posibilidad);
+
+
+                                    }
 
 
                                 }
+
+                                
                             }
 
                         }
@@ -521,15 +537,22 @@ namespace Proyecto_201700404.Clases
                             {
                                 //Console.WriteLine(" paso aca entro a fila: " + i + "  columna: " + j);
                                 posibilidad.getLista().Add(this.buscarFicha(i, j));
-                                if (Variables.tablero[i - 1, j + 1] != null && Variables.tablero[i - 1, j + 1].estado == "desocupado")
-                                {
 
-                                    posibilidad.origen = fichaelegida;
-                                    posibilidad.Fila = i;
-                                    posibilidad.Columna = j + 2;
-                                    lista_posibilidades.Add(posibilidad);
+                                if ((i-1)>=0 && (j+1)<8) {
+                                    if (Variables.tablero[i - 1, j + 1] != null && Variables.tablero[i - 1, j + 1].estado == "desocupado")
+                                    {
+
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i;
+                                        posibilidad.Columna = j + 2;
+                                        lista_posibilidades.Add(posibilidad);
+
+                                    }
+
+
 
                                 }
+                                
 
 
                             }
@@ -591,15 +614,23 @@ namespace Proyecto_201700404.Clases
                             {
 
                                 posibilidad.getLista().Add(this.buscarFicha(i, j));
-                                if (Variables.tablero[i - 1, j - 1] != null && Variables.tablero[i - 1, j - 1].estado == "desocupado")
-                                {
 
-                                    posibilidad.origen = fichaelegida;
-                                    posibilidad.Fila = i;
-                                    posibilidad.Columna = j;
-                                    lista_posibilidades.Add(posibilidad);
+
+                                if ((i-1)>=0 && (j-1)>=0) {
+                                    if (Variables.tablero[i - 1, j - 1] != null && Variables.tablero[i - 1, j - 1].estado == "desocupado")
+                                    {
+
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i;
+                                        posibilidad.Columna = j;
+                                        lista_posibilidades.Add(posibilidad);
+
+                                    }
+
+
 
                                 }
+                                
                             }
                             //Console.WriteLine(" paso aca entro a fila: " + i + "  columna: " + j);
                         }
