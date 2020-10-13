@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Proyecto_201700404.Models;
 using Proyecto_201700404.Models.ViewModels;
 using Proyecto_201700404.Clases;
+using System.IO;
+using System.Xml;
 
 namespace Proyecto_201700404.Controllers
 {
@@ -18,6 +20,107 @@ namespace Proyecto_201700404.Controllers
         {
             return View();
         }
+        public FileResult Descargar() {
+            string Rutasitio = Server.MapPath("~/");
+            string nombreArch = "Archivo"+Variables.N_archivo;
+            string rutacompleta = Path.Combine(Rutasitio+"/FilesDes/"+nombreArch+".xml");
+
+            XmlWriter xmlWriter = XmlWriter.Create(rutacompleta);
+            xmlWriter.WriteStartDocument();
+
+            xmlWriter.WriteStartElement("tablero");
+            xmlWriter.WriteString("\r\n\t");
+
+            foreach (var ficha in Variables.fichas)
+            {
+                xmlWriter.WriteStartElement("ficha");
+
+
+                xmlWriter.WriteString("\r\n\t\t");
+                xmlWriter.WriteStartElement("color");
+                xmlWriter.WriteString(ficha.color);
+                xmlWriter.WriteEndElement();
+
+
+                xmlWriter.WriteString("\r\n\t\t");
+                xmlWriter.WriteStartElement("columna");
+                xmlWriter.WriteString(this.regresarLetra(ficha.columna));
+                xmlWriter.WriteEndElement();
+
+
+                xmlWriter.WriteString("\r\n\t\t");
+                xmlWriter.WriteStartElement("fila");
+                xmlWriter.WriteString(ficha.fila.ToString());
+                xmlWriter.WriteEndElement();
+
+
+
+                //xmlWriter.WriteStartElement("");
+                //xmlWriter.WriteEndElement(); xmlWriter.WriteStartElement("");
+                //xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteEndElement();
+
+            }
+
+
+            xmlWriter.WriteStartElement("siguienteTiro");
+
+            xmlWriter.WriteStartElement("color");
+            xmlWriter.WriteString("\r\n\t\t");
+            if (Variables.turno == 1) {
+                xmlWriter.WriteString("negro");
+            } else if (Variables.turno==2) {
+                xmlWriter.WriteString("blanco");
+            }
+            xmlWriter.WriteEndElement();
+
+
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndDocument();
+
+            xmlWriter.Close();
+
+
+            return File(rutacompleta,"application/xml",nombreArch+".xml");
+            //return View();  
+        }
+
+        private string regresarLetra(int columna)
+        {
+            String letra = "";
+            switch (columna) {
+                case 1:
+                    letra = "A";
+                    break;
+                case 2:
+                    letra = "B";
+                    break;
+                case 3:
+                    letra = "C";
+                    break;
+                case 4:
+                    letra = "C";
+                    break;
+                case 5:
+                    letra = "E";
+                    break;
+                case 6:
+                    letra = "F";
+                    break;
+                case 7:
+                    letra = "G";
+                    break;
+                case 8:
+                    letra = "H";
+                    break;
+                default:
+                    break;
+            }
+            return letra;
+           
+        }
+
         public ActionResult Ganador() {
             Ganador ganador = new Ganador();
 

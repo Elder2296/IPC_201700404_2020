@@ -9,6 +9,7 @@ namespace Proyecto_201700404.Clases
     {
         public static List<Ficha> fichas = new List<Ficha>();
         public static Casilla[,] tablero = new Casilla[8, 8];
+        public static int N_archivo = 0;
         public static int valides = 0;
         public static int mov_jugador1 = 0;
         public static int mov_jugador2 = 0;
