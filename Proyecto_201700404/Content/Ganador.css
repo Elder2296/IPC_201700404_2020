@@ -1,0 +1,11 @@
+﻿.variable {
+    height: 100vh;
+}
+.variable {
+    background-image: url('../src/img/fondo9.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: aquamarine;
+}

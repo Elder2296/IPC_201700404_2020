@@ -132,6 +132,7 @@
     <Compile Include="Clases\Casilla.cs" />
     <Compile Include="Clases\Control.cs" />
     <Compile Include="Clases\Ficha.cs" />
+    <Compile Include="Clases\Ganador.cs" />
     <Compile Include="Clases\Posibilidad.cs" />
     <Compile Include="Clases\Variables.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -186,6 +187,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Ganador.css" />
     <Content Include="Content\JugarEstilos.css" />
     <Content Include="Content\MasterAdmin.css" />
     <Content Include="Content\MasterHome.css" />
@@ -231,6 +233,7 @@
     <Content Include="src\img\fondo6.jpg" />
     <Content Include="src\img\fondo7.jpg" />
     <Content Include="src\img\fondo8.jpg" />
+    <Content Include="src\img\fondo9.jpg" />
     <Content Include="src\img\game.jpg" />
     <Content Include="src\img\hotello.png" />
     <Content Include="src\img\img.pn.png" />
@@ -266,6 +269,7 @@
     <Content Include="Views\Master\_tablero.cshtml" />
     <Content Include="Views\Jugar\Tablero.cshtml" />
     <Content Include="Views\Jugar\ConfiguracionFichas.cshtml" />
+    <Content Include="Views\Jugar\Ganador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

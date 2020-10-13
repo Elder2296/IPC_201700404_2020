@@ -26,8 +26,8 @@
 
                 <label class="col-sm-4 col-form-label text-white"> @user.nombreUsuario :</label>
                 <div class="col-sm-8">
-                    
-                    @Html.DropDownListFor(d =>d.idcolor1,new SelectList(db.ColorFicha,"idcolor","color"),"Selecione color",new { @class="form-control"})
+
+                    @Html.DropDownListFor(d => d.idcolor1, new SelectList(db.ColorFicha, "idcolor", "color"), "Selecione color", new { @class = "form-control" })
 
                     @*@Html.DropDownListFor(d => d.id_ciudad, new SelectList(Model.ciudades, "id_ciudad", "nombre_pais"), "Seleciones pais", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.id_ciudad, null, new { @class = "blanco" })*@
@@ -35,21 +35,26 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            @*<div class="form-group row">
 
-                <label class="col-sm-4 col-form-label text-white"> Invitado:</label>
-                <div class="col-sm-8">
-                    @Html.DropDownListFor(d => d.idcolor2, new SelectList(db.ColorFicha, "idcolor", "color"), "Selecione color", new { @class = "form-control" })
+        <label class="col-sm-4 col-form-label text-white"> Invitado:</label>
+        <div class="col-sm-8">
+            @Html.DropDownListFor(d => d.idcolor2, new SelectList(db.ColorFicha, "idcolor", "color"), "Selecione color", new { @class = "form-control" })*@
 
 
-                    @*@Html.DropDownListFor(d => d.id_ciudad, new SelectList(Model.ciudades, "id_ciudad", "nombre_pais"), "Seleciones pais", new { @class = "form-control" })
+            @*@Html.DropDownListFor(d => d.id_ciudad, new SelectList(Model.ciudades, "id_ciudad", "nombre_pais"), "Seleciones pais", new { @class = "form-control" })
         @Html.ValidationMessageFor(d => d.id_ciudad, null, new { @class = "blanco" })*@
 
-                </div>
-            </div>
+            @*</div>
+        </div>*@
 
             <div class="form-group row">
                 <button value="Ir a partida" type="submit" class="form-control btn btn-primary">Ir a partida</button>
+
+            </div>
+
+            <div class="form-group row">
+                <button value="Ir a partida" @*type="submit"*@ class="form-control btn btn-primary text-white">@Html.ActionLink("Colores Aleatorios","Ganador","Jugar")</button>
 
             </div>
 

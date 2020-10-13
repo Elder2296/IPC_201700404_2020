@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+    var ganador = (Proyecto_201700404.Clases.Ganador)TempData["Ganador"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ganador</title>
+    <link href="~/Content/Ganador.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body class="variable">
+
+    <div style="width: 40%;height:auto; background-color: rgba(255, 255, 255,.75); border-radius:10px; position:absolute; top:50%; left:50%; transform:translate(-47%,-50%)">
+        <div class="bg-dark " style="border-radius: 10px 10px 0px 0px;">
+            <h1 class="text-white text-center">Ganador</h1>
+            <h3 class="text-white text-center">@ganador.ganador has ganado la partida!!!</h3>
+
+
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                
+                <tr>
+                    <th scope="col">
+                        Jugador
+                    </th>
+                    <th scope="col">
+                        Movimientos
+                    </th>
+                    <th scope="col">
+                        No. de Fichas
+                    </th>
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tex-white">
+                        @ganador.ganador
+                    </td>
+                    <td>
+                        @ganador.movimientosGanador
+                    </td>
+                    <td>
+                        @ganador.fichasGanador
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                         @ganador.perdedor
+                    </td>
+                    <td>
+                        @ganador.movimeintoPerdedor
+                    </td>
+                    <td>
+                         @ganador.movimeintoPerdedor;
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+        <div class="form-group">
+
+            <button class=" form-control btn btn-warning center-block">
+                @Html.ActionLink("Regresar a menu principal","RegresarMenu","Jugador",new { area=""}, new { @class = " text-white" })
+
+            </button>
+        </div>
+
+        
+
+    </div>
+    
+    
+</body>
+</html>

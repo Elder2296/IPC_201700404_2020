@@ -18,8 +18,79 @@ namespace Proyecto_201700404.Controllers
         {
             return View();
         }
+        public ActionResult Ganador() {
+            Ganador ganador = new Ganador();
+
+            int fichasblancas = 0;
+            int fichasnegras = 0;
+            foreach (var item in Variables.fichas)
+            {
+                if (item.color == "blanco") {
+                    fichasblancas = fichasblancas + 1;
+                } else if (item.color=="negro") {
+                    fichasnegras = fichasnegras + 1;
+                
+                }
+
+            }
+            int dif = 0;
+            if (Variables.fichas.Count()<64) {
+                dif = 64-Variables.fichas.Count();
+            }
+
+            var gan = (Proyecto_201700404.Models.USUARIO)Session["user"];
+            if (fichasblancas > fichasnegras)
+            {
+                ganador.ganador = "Invitado";
+                ganador.perdedor = gan.nombreUsuario;
+                ganador.fichasGanador = fichasblancas + dif;
+                ganador.fichasPerdedor = fichasnegras;
+                ganador.movimientosGanador = Variables.mov_jugador2;
+                ganador.movimeintoPerdedor = Variables.mov_jugador1;
+
+
+            }
+            else if (fichasnegras > fichasblancas)
+            {
+
+                ganador.ganador = gan.nombreUsuario;
+                ganador.perdedor = "Invitado";
+                ganador.fichasGanador = fichasnegras + dif;
+                ganador.fichasPerdedor = fichasblancas;
+                ganador.movimientosGanador = Variables.mov_jugador1;
+                ganador.movimeintoPerdedor = Variables.mov_jugador2;
+            }
+            if (fichasnegras==fichasblancas) {
+                ganador.ganador = "Empate";
+                ganador.perdedor = "Invitado";
+                ganador.fichasGanador = fichasnegras;
+                ganador.fichasPerdedor = fichasblancas;
+                ganador.movimientosGanador = Variables.mov_jugador1;
+                ganador.movimeintoPerdedor = Variables.mov_jugador2;
+            }
+
+            @TempData["Ganador"] = ganador;
+
+                Variables.fichas.Clear();
+            Variables.VaciarTablero();
+
+            return View();
+        }
+
+        public ActionResult RegresarMenu() {
+            return RedirectToAction("Jugar","Jugar");
+        }
         public ActionResult ConfiguracionFichas() {
             return View();
+        }
+        public ActionResult Regresar() {
+            Variables.fichas.Clear();
+            Variables.VaciarTablero();
+            Variables.mov_jugador1 = 0;
+            Variables.mov_jugador2 = 0;
+
+
+            return RedirectToAction("ConfiguracionFichas");
         }
         [HttpPost]
         public ActionResult ConfiguracionFichas(Elegirfichas color)
@@ -27,20 +98,39 @@ namespace Proyecto_201700404.Controllers
 
             if (ModelState.IsValid)
             {
-                System.Diagnostics.Debug.WriteLine("se para la partida");
-                System.Diagnostics.Debug.WriteLine("Colores elejidos: "+color.idcolor1);
-                System.Diagnostics.Debug.WriteLine("Colores elegidos 2: "+ color.idcolor2);
+                //System.Diagnostics.Debug.WriteLine("se para la partida");
+                System.Diagnostics.Debug.WriteLine("Colores elejidos: " + color.idcolor1);
+                //System.Diagnostics.Debug.WriteLine("Colores elegidos 2: "+ color.idcolor2);
 
                 //var seed = Environment.TickCount;
-                
+
                 var turno = new Random().Next(1,100);
-                System.Diagnostics.Debug.WriteLine("El turno le corresponde al: "+turno);
+                //System.Diagnostics.Debug.WriteLine("El turno le corresponde al: "+turno);
+
+
+                if (color.idcolor1 == 1)
+                {
+                    Variables.color1 = "negro";
+                    Variables.color2 = "blanco";
+                }
+                else if (color.idcolor1 == 2)
+                {
+                    Variables.color1 = "blanco";
+                    Variables.color2 = "negro";
+
+                }
+
+
                 if ((turno % 2) == 0)
                 {
                     turno = 1;
+                    
+
+                    
                 }
                 else {
                     turno = 2;
+
                 }
                 Variables.turno = turno;
                 System.Diagnostics.Debug.WriteLine("El turno le corresponde al: " + turno);
@@ -83,8 +173,45 @@ namespace Proyecto_201700404.Controllers
             this.procesoJuego(Variables.turno,idcelda);
 
             @TempData["jugador"] = this.turnoJugador(Variables.turno);
+            int termino = 0;
 
+            if (Variables.turno == 1)
+            {
+                Control control = new Control();
+                control.buscarXColor(1);
 
+                if (control.listadePosibilidades().Count() == 0)
+                {
+                    Control control2 = new Control();
+                    control2.buscarXColor(2);
+                    if (control2.listadePosibilidades().Count() == 0)
+                    {
+                        termino = 1;
+                    }
+
+                }
+            }
+            else  if(Variables.turno==2){
+
+                Control control = new Control();
+                control.buscarXColor(2);
+
+                if (control.listadePosibilidades().Count() == 0)
+                {
+                    Control control2 = new Control();
+                    control2.buscarXColor(1);
+                    if (control2.listadePosibilidades().Count() == 0)
+                    {
+                        termino = 1;
+                    }
+
+                }
+
+            }
+
+            if (termino==1) {
+                Variables.Se_termino = 1;
+            }
 
 
 
@@ -112,8 +239,13 @@ namespace Proyecto_201700404.Controllers
         }
 
         public void procesoJuego(int turno,string idcelda) {
+
+
+
             
-            
+
+
+
 
             if (idcelda == "tablero" || idcelda == null)
             {
@@ -268,6 +400,29 @@ namespace Proyecto_201700404.Controllers
 
 
             }
+
+            if (turno == 1)
+            {
+                Control control3 = new Control();
+                control3.buscarXColor(turno);
+                if (control3.listadePosibilidades().Count() == 0)
+                {
+                    Variables.turno = 2;
+                }
+
+            }
+            else if (turno == 2)
+            {
+                Control control4 = new Control();
+                control4.buscarXColor(turno);
+                if (control4.listadePosibilidades().Count() == 0)
+                {
+                    Variables.turno = 1;
+                }
+            }
+
+
+
         }
 
 

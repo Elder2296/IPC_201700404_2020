@@ -10,8 +10,7 @@ namespace Proyecto_201700404.Models.ViewModels
     {
         [Required]
         public int idcolor1 { set; get; }
-        [Required]
-        public int idcolor2 { set; get; }
+       
         public List<ColorFicha> colores { set; get; }
 
     }

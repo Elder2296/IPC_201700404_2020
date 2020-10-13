@@ -12,6 +12,10 @@ namespace Proyecto_201700404.Clases
         public static int valides = 0;
         public static int mov_jugador1 = 0;
         public static int mov_jugador2 = 0;
+        public static int Se_termino = 0;
+        public static string color1 = "";
+        public static string color2 = "";
+
 
 
         public static int turno = 0;
@@ -87,6 +91,17 @@ namespace Proyecto_201700404.Clases
 
 
 
+        }
+        public static void VaciarTablero() {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    tablero[i, j].estado = "desocupado";
+
+                }
+
+            }
         }
         public static void iniciarTablero() {
             for (int i = 0; i < 8; i++)

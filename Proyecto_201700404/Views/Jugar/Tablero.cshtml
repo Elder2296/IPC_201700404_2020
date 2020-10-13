@@ -155,24 +155,57 @@
                 </div>
                 <div class="row justify-content-md-center ">
                     <p style=" font-family:'Agency FB';font-size:30px;" class="text-white">
-                        @TempData["jugador"]
+                        @if (Proyecto_201700404.Clases.Variables.turno == 1)
+                        {
+                            @TempData["jugador"]
+                        }
+                        else { 
+                            <label>Invitado</label>
+                        }
+
+
+
                     </p>
                 </div>
                 <div class="row justify-content-md-center  ">
                     <div style="width:50%; height:85px;" class="btn btn-success border">
                         @if (TempData["jugador"] == "Invitado")
                         {
-                            <button class="ficha bg-white"></button>
+
+                            if (Proyecto_201700404.Clases.Variables.color2 == "negro")
+                            {
+                                <button class="ficha bg-dark"></button>
+                            }
+                            else if(Proyecto_201700404.Clases.Variables.color2 == "blanco")
+                            {
+                                <button class="ficha bg-white"></button>
+                            }
+
+                            
                         }
                         else
                         {
-                            <button class="ficha bg-dark"></button>
+                            if (Proyecto_201700404.Clases.Variables.color1 == "negro")
+                            {
+                                <button class="ficha bg-dark"></button>
+                            }
+                            else  if (Proyecto_201700404.Clases.Variables.color1 == "blanco")
+                            {
+                                <button class="ficha bg-white"></button>
+                            }
+
+
                         }
                     </div>
                 </div>
 
             </div>
-            
+            @if (Proyecto_201700404.Clases.Variables.Se_termino == 1)
+            {
+                <button class="btn btn-danger my-2 my-sm-0 btn-lg ">@Html.ActionLink("Revelar al Ganador", "Ganador", "Jugar",new { area=""}, new { @class = " text-white" })</button>
+
+            }
+
         </div>
 
     </div>
