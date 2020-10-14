@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Estadisticas";
+    Layout = "~/Views/Master/MasterPlayer.cshtml";
+}
+
+    <div style="width: 50%;height:auto; background-color: rgba(255, 255, 255,.75); border-radius:10px; position:absolute; top:50%; left:50%; transform:translate(-47%,-50%)">
+
+        <div class="bg-dark " style="border-radius: 10px 10px 0px 0px;">
+            <h1 class="text-white text-center">Estadisticas Generales</h1>
+
+
+
+
+
+
+
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th scope="col">
+                        Partida
+                    </th>
+                    <th scope="col">
+                        Ganador
+                    </th>
+                    <th scope="col">
+                        Perdedor
+                    </th>
+                    <th scope="col">
+                        Movimientos Ganador
+                    </th>
+                    <th scope="col">
+                        Movimientos Perdedor
+                    </th>
+                    <th scope="col">
+                        Fichas Ganador
+                    </th>
+                    <th scope="col">
+                        Fichas Perdedor
+                    </th>
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+
+                @foreach (var item in Proyecto_201700404.Clases.Variables.juegos)
+                {
+                    <tr>
+                        <td>
+                            @item.idPartida
+
+                        </td>
+                        <td>
+                            @item.ganador
+                        </td>
+                        <td>
+                            @item.perdedor
+                        </td>
+                        <td>
+                            @item.mov_ganador
+                        </td>
+                        <td>
+                            @item.mov_perdedor
+                        </td>
+                        <td>
+                            @item.fichas_ganador
+                        </td>
+                        <td>
+                            @item.fichas_perdedor
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+    </div>

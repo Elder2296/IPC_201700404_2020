@@ -14,6 +14,19 @@
     <Property Name="idcolor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="color" Type="varchar" MaxLength="25" />
   </EntityType>
+  <EntityType Name="Juego">
+    <Key>
+      <PropertyRef Name="idPartida" />
+    </Key>
+    <Property Name="idPartida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idjugador" Type="int" Nullable="false" />
+    <Property Name="ganador" Type="varchar" MaxLength="25" />
+    <Property Name="perdedor" Type="varchar" MaxLength="25" />
+    <Property Name="mov_ganador" Type="int" />
+    <Property Name="mov_perdedor" Type="int" />
+    <Property Name="fichas_ganador" Type="int" />
+    <Property Name="fichas_perdedor" Type="int" />
+  </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="Movimiento">
@@ -54,9 +67,22 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Usuario">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="Juego" Type="Self.Juego" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Juego">
+        <PropertyRef Name="idjugador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="iGamegtModelStoreContainer">
     <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ColorFicha" EntityType="Self.ColorFicha" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Juego" EntityType="Self.Juego" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Movimiento" EntityType="Self.Movimiento" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -69,6 +95,10 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
     <AssociationSet Name="FK__USUARIO__id_ciud__4D94879B" Association="Self.FK__USUARIO__id_ciud__4D94879B">
       <End Role="CIUDAD" EntitySet="CIUDAD" />
       <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="Juego" EntitySet="Juego" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -18,7 +18,16 @@
     <div style="width: 40%;height:auto; background-color: rgba(255, 255, 255,.75); border-radius:10px; position:absolute; top:50%; left:50%; transform:translate(-47%,-50%)">
         <div class="bg-dark " style="border-radius: 10px 10px 0px 0px;">
             <h1 class="text-white text-center">Ganador</h1>
-            <h3 class="text-white text-center">@ganador.ganador has ganado la partida!!!</h3>
+            
+            @if (Proyecto_201700404.Clases.Variables.ganador.ganador == "Empate")
+            {
+                <h3 class="text-white text-center"> HUBO UN EMPATE</h3>
+            }
+            else { 
+            <h3 class="text-white text-center">@Proyecto_201700404.Clases.Variables.ganador.ganador has ganado </h3>
+            }
+                    
+               
 
 
         </div>
@@ -43,26 +52,26 @@
             <tbody>
                 <tr>
                     <td class="tex-white">
-                        @ganador.ganador
+                        @Proyecto_201700404.Clases.Variables.ganador
                     </td>
                     <td>
-                        @ganador.movimientosGanador
+                        @Proyecto_201700404.Clases.Variables.ganador.movimientosGanador
                     </td>
                     <td>
-                        @ganador.fichasGanador
+                        @Proyecto_201700404.Clases.Variables.ganador.fichasGanador
                     </td>
 
                 </tr>
 
                 <tr>
                     <td>
-                         @ganador.perdedor
+                         @Proyecto_201700404.Clases.Variables.ganador.perdedor
                     </td>
                     <td>
-                        @ganador.movimeintoPerdedor
+                        @Proyecto_201700404.Clases.Variables.ganador.movimeintoPerdedor
                     </td>
                     <td>
-                         @ganador.movimeintoPerdedor;
+                         @Proyecto_201700404.Clases.Variables.ganador.fichasPerdedor
                     </td>
 
                 </tr>
@@ -73,7 +82,7 @@
         <div class="form-group">
 
             <button class=" form-control btn btn-warning center-block">
-                @Html.ActionLink("Regresar a menu principal","RegresarMenu","Jugador",new { area=""}, new { @class = " text-white" })
+                @Html.ActionLink("Regresar a menu principal","Player","Player",new { area=""}, new { @class = " text-white" })
 
             </button>
         </div>

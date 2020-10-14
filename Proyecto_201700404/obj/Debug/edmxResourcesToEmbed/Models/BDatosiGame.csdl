@@ -22,6 +22,7 @@
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="id_ciudad" Type="Int32" />
     <NavigationProperty Name="CIUDAD" Relationship="Self.FK__USUARIO__id_ciud__4D94879B" FromRole="USUARIO" ToRole="CIUDAD" />
+    <NavigationProperty Name="Juego" Relationship="iGamegtModel.FK_Usuario" FromRole="USUARIO" ToRole="Juego" />
   </EntityType>
   <EntityType Name="Movimiento">
     <Key>
@@ -56,6 +57,11 @@
       <End Role="USUARIO" EntitySet="USUARIO" />
     </AssociationSet>
     <EntitySet Name="ColorFicha" EntityType="iGamegtModel.ColorFicha" />
+    <EntitySet Name="Juego" EntityType="iGamegtModel.Juego" />
+    <AssociationSet Name="FK_Usuario" Association="iGamegtModel.FK_Usuario">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="Juego" EntitySet="Juego" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ColorFicha">
     <Key>
@@ -64,4 +70,30 @@
     <Property Name="idcolor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="color" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="Juego">
+    <Key>
+      <PropertyRef Name="idPartida" />
+    </Key>
+    <Property Name="idPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idjugador" Type="Int32" Nullable="false" />
+    <Property Name="ganador" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="perdedor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="mov_ganador" Type="Int32" />
+    <Property Name="mov_perdedor" Type="Int32" />
+    <Property Name="fichas_ganador" Type="Int32" />
+    <Property Name="fichas_perdedor" Type="Int32" />
+    <NavigationProperty Name="USUARIO" Relationship="iGamegtModel.FK_Usuario" FromRole="Juego" ToRole="USUARIO" />
+  </EntityType>
+  <Association Name="FK_Usuario">
+    <End Type="iGamegtModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+    <End Type="iGamegtModel.Juego" Role="Juego" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Juego">
+        <PropertyRef Name="idjugador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

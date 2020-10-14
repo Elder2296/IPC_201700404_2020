@@ -27,7 +27,7 @@ namespace Proyecto_201700404.Controllers
 
             XmlWriter xmlWriter = XmlWriter.Create(rutacompleta);
             xmlWriter.WriteStartDocument();
-
+           
             xmlWriter.WriteStartElement("tablero");
             xmlWriter.WriteString("\r\n\t");
 
@@ -53,6 +53,8 @@ namespace Proyecto_201700404.Controllers
                 xmlWriter.WriteString(ficha.fila.ToString());
                 xmlWriter.WriteEndElement();
 
+                xmlWriter.WriteString("\r\n\t");
+
 
 
                 //xmlWriter.WriteStartElement("");
@@ -77,9 +79,11 @@ namespace Proyecto_201700404.Controllers
 
 
             xmlWriter.WriteEndElement();
+            xmlWriter.WriteString("\r\n");
             xmlWriter.WriteEndDocument();
 
             xmlWriter.Close();
+            Variables.N_archivo = Variables.N_archivo + 1;
 
 
             return File(rutacompleta,"application/xml",nombreArch+".xml");
@@ -128,6 +132,8 @@ namespace Proyecto_201700404.Controllers
             int fichasnegras = 0;
             foreach (var item in Variables.fichas)
             {
+
+                System.Diagnostics.Debug.WriteLine("Ficha color: "+item.color+" fila: "+item.fila+" columna: "+item.columna);
                 if (item.color == "blanco") {
                     fichasblancas = fichasblancas + 1;
                 } else if (item.color=="negro") {
@@ -136,18 +142,51 @@ namespace Proyecto_201700404.Controllers
                 }
 
             }
-            int dif = 0;
-            if (Variables.fichas.Count()<64) {
-                dif = 64-Variables.fichas.Count();
+
+            
+            System.Diagnostics.Debug.WriteLine("Fichas blancas: " +fichasblancas);
+            System.Diagnostics.Debug.WriteLine("Fichas negras:  "+fichasnegras);
+            int fb = 0;
+            int fn = 0;
+                
+            foreach (var item in Variables.fichas)
+            {
+                if (item.color=="blanco") {
+                    fb = fb + 1;
+                }
+
             }
+            foreach (var item in Variables.fichas)
+            {
+                if (item.color == "negro")
+                {
+                    fn = fn + 1;
+                }
+
+            }
+
+            System.Diagnostics.Debug.WriteLine("OTRO RESULTADO Fichas blancas: " + fb);
+            System.Diagnostics.Debug.WriteLine("OTRO RESULTADO Fichas negras:  " + fn);
 
             var gan = (Proyecto_201700404.Models.USUARIO)Session["user"];
             if (fichasblancas > fichasnegras)
             {
-                ganador.ganador = "Invitado";
+                
+
+                //ganador.ganador = gan.nombreUsuario;
+                if (Variables.viene == 1)
+                {
+                    ganador.ganador = "Invitado";
+                }
+                else
+                {
+                    ganador.ganador = "Maquina";
+                }
                 ganador.perdedor = gan.nombreUsuario;
-                ganador.fichasGanador = fichasblancas + dif;
+                ganador.fichasGanador = fichasblancas ;
                 ganador.fichasPerdedor = fichasnegras;
+
+                
                 ganador.movimientosGanador = Variables.mov_jugador2;
                 ganador.movimeintoPerdedor = Variables.mov_jugador1;
 
@@ -157,13 +196,20 @@ namespace Proyecto_201700404.Controllers
             {
 
                 ganador.ganador = gan.nombreUsuario;
-                ganador.perdedor = "Invitado";
-                ganador.fichasGanador = fichasnegras + dif;
+                if (Variables.viene == 1)
+                {
+                    ganador.perdedor = "Invitado";
+                }
+                else {
+                    ganador.perdedor = "Maquina";
+                }
+                
+                ganador.fichasGanador = fichasnegras ;
                 ganador.fichasPerdedor = fichasblancas;
                 ganador.movimientosGanador = Variables.mov_jugador1;
                 ganador.movimeintoPerdedor = Variables.mov_jugador2;
             }
-            if (fichasnegras==fichasblancas) {
+            else if (fichasnegras==fichasblancas) {
                 ganador.ganador = "Empate";
                 ganador.perdedor = "Invitado";
                 ganador.fichasGanador = fichasnegras;
@@ -172,16 +218,40 @@ namespace Proyecto_201700404.Controllers
                 ganador.movimeintoPerdedor = Variables.mov_jugador2;
             }
 
-            @TempData["Ganador"] = ganador;
+            System.Diagnostics.Debug.WriteLine("ESTOS DATOS TRAE LA VARIABLE GANADOR fichas ganador: "+ganador.fichasGanador);
+            System.Diagnostics.Debug.WriteLine("ESTOS DATOS TRAE LA VARIABLE GANADOR fichas perdedor: " + ganador.fichasPerdedor);
 
-                Variables.fichas.Clear();
+
+
+
+           Variables.ganador = ganador;
+
+            Variables.fichas.Clear();
             Variables.VaciarTablero();
+
+
+
+            iGamegtEntities1 bdatos = new iGamegtEntities1();
+
+            Juego juego = new Juego();
+            juego.idjugador = gan.id_usuario;
+            juego.ganador = Variables.ganador.ganador;
+            juego.perdedor = Variables.ganador.perdedor;
+            juego.mov_ganador = Variables.ganador.movimientosGanador;
+            juego.mov_perdedor = Variables.ganador.movimeintoPerdedor;
+            juego.fichas_ganador = Variables.ganador.fichasGanador;
+            juego.fichas_perdedor = Variables.ganador.fichasPerdedor;
+
+            bdatos.Juego.Add(juego);
+            bdatos.SaveChanges();
+
+
 
             return View();
         }
 
         public ActionResult RegresarMenu() {
-            return RedirectToAction("Jugar","Jugar");
+            return RedirectToAction("Player","Player");
         }
         public ActionResult ConfiguracionFichas() {
             return View();
@@ -239,6 +309,21 @@ namespace Proyecto_201700404.Controllers
                 System.Diagnostics.Debug.WriteLine("El turno le corresponde al: " + turno);
 
                 Variables.fichasbasicas();
+
+                string jugador = "";
+                if (Variables.turno == 1)  //mostrata de quien sera el turno en la vista
+
+                {
+                    Proyecto_201700404.Models.USUARIO user = (Proyecto_201700404.Models.USUARIO)Session["user"];
+                    jugador = user.nombreUsuario;
+                }
+                else
+                {
+                    jugador = "Invitado";
+                }
+
+                @TempData["jugador"] = jugador;
+
                 return RedirectToAction("PartidaMaquina");                   
                 
             }
@@ -249,19 +334,7 @@ namespace Proyecto_201700404.Controllers
             
         }
         public ActionResult PartidaMaquina() {
-            string jugador = "";
-            if (Variables.turno == 1)  //mostrata de quien sera el turno en la vista
-
-            {
-                Proyecto_201700404.Models.USUARIO user = (Proyecto_201700404.Models.USUARIO)Session["user"];
-                jugador = user.nombreUsuario;
-            }
-            else
-            {
-                jugador = "Invitado";
-            }
             
-            @TempData["jugador"] = jugador;
             
             return View();
         }
@@ -276,6 +349,20 @@ namespace Proyecto_201700404.Controllers
             this.procesoJuego(Variables.turno,idcelda);
 
             @TempData["jugador"] = this.turnoJugador(Variables.turno);
+
+            this.Verificar();
+
+
+
+
+
+
+            return PartialView("Tablero"/*, Contenedor_.movimientos*/);
+            //return Json(celda, JsonRequestBehavior.AllowGet);
+        }
+        public void Verificar() {
+
+
             int termino = 0;
 
             if (Variables.turno == 1)
@@ -294,7 +381,8 @@ namespace Proyecto_201700404.Controllers
 
                 }
             }
-            else  if(Variables.turno==2){
+            else if (Variables.turno == 2)
+            {
 
                 Control control = new Control();
                 control.buscarXColor(2);
@@ -312,17 +400,11 @@ namespace Proyecto_201700404.Controllers
 
             }
 
-            if (termino==1) {
+            if (termino == 1)
+            {
                 Variables.Se_termino = 1;
             }
 
-
-
-
-
-
-            return PartialView("Tablero"/*, Contenedor_.movimientos*/);
-            //return Json(celda, JsonRequestBehavior.AllowGet);
         }
 
         public string turnoJugador(int turno) {
@@ -528,6 +610,112 @@ namespace Proyecto_201700404.Controllers
 
         }
 
+
+
+
+
+
+
+
+
+
+
+        public ActionResult ContraMaquina() {
+            if (Variables.viene == 1)
+            {
+                string jugador = "";
+                var turno = new Random().Next(1, 100);
+                if ((turno % 2) == 0)
+                {
+                    turno = 1;
+
+                }
+                else
+                {
+                    turno = 2;
+                }
+
+                if (turno == 1)
+                {
+                    Proyecto_201700404.Models.USUARIO user = (Proyecto_201700404.Models.USUARIO)Session["user"];
+                    jugador = user.nombreUsuario;
+                }
+                else
+                {
+                    jugador = "Maquina";
+                }
+
+                Variables.turno = turno;
+                Variables.fichasbasicas();
+                @TempData["jugador"] = jugador;
+
+            }
+            else {
+                this.Verificar();
+            }
+            
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ContraMaquina(string idcelda)
+        {
+
+            if (Variables.turno==1) {
+                this.procesoJuego(Variables.turno,idcelda);
+                @TempData["jugador"] = this.turnoJugador(Variables.turno);
+            }
+
+            this.Verificar();
+
+            return PartialView("TableroMaquina");
+        }
+        public ActionResult MovMaquina() {
+
+            if (Variables.turno==2) {
+                Control control2 = new Control();
+                //control2.mostraTabla();
+                control2.buscarXColor(Variables.turno);
+                int n_items = control2.listadePosibilidades().Count();
+                if (n_items == 0)
+                {
+                    Variables.turno = 1;
+                }
+                else {
+                    int aleatorio = new Random().Next(1,n_items);
+                    int c = 1;
+                    foreach (var item in control2.listadePosibilidades())
+                    {
+                        if (c==aleatorio) {
+                            Ficha ficha = new Ficha();
+                            ficha.color = "blanco";
+                            ficha.fila = item.Fila;
+                            ficha.columna = item.Columna;
+                            Variables.mov_jugador2 = Variables.mov_jugador2 + 1;
+                            Variables.valides = 1;
+                            @TempData["valides"] = TempData["jugador"];
+                            control2.buscarfichaParavoltear(ficha);
+                            Variables.fichas.Add(ficha);
+                            Variables.tablero[ficha.fila-1,ficha.columna-1].estado="ocupado";
+                            Variables.turno = 1;
+                            break;
+                        }
+
+                        c = c + 1;
+                    }
+
+
+                }
+                
+            }
+
+            this.turnoJugador(Variables.turno);
+
+            Variables.viene = 2;
+            return RedirectToAction("ContraMaquina");
+        }
+
+        
 
     }
 }

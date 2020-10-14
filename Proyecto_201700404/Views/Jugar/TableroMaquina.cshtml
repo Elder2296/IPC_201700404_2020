@@ -1,8 +1,10 @@
 ﻿@{ 
+    var user=(Proyecto_201700404.Models.USUARIO)Session["user"];
     var lista = Proyecto_201700404.Clases.Variables.fichas;
     var valides = Proyecto_201700404.Clases.Variables.valides;
-
 }
+
+
 <div class="container">
     <div class="row" id="tablero">
         <div class="col-2">
@@ -15,13 +17,13 @@
                 <tbody>
                     <tr>
                         <th>
-                            Jugador1:
+                            @user.nombreUsuario
                         </th>
                         <th>@Proyecto_201700404.Clases.Variables.mov_jugador1</th>
                     </tr>
                     <tr>
                         <th>
-                            Invitado:
+                            Maquina:
                         </th>
                         <th>@Proyecto_201700404.Clases.Variables.mov_jugador2</th>
                     </tr>
@@ -33,22 +35,27 @@
                     </tr>
 
                     <tr>
-                        
-                            @if (valides == 0) {
-                                <th>
-                                    Aun no empieza la partida
-                                </th>
 
-                            } else if (valides == 1) {
-                    <th>
-                        La jugada es valida @TempData["valides"]
-                    </th>
-                            } else if (valides==2) {
-                    <th>
-                        La jugada es invalida @TempData["valides"]
-                    </th>
-                            
-                            }
+                        @if (valides == 0)
+                        {
+                            <th>
+                                Aun no empieza la partida
+                            </th>
+
+                        }
+                        else if (valides == 1)
+                        {
+                            <th>
+                                La jugada es valida @TempData["valides"]
+                            </th>
+                        }
+                        else if (valides == 2)
+                        {
+                            <th>
+                                La jugada es invalida @TempData["valides"]
+                            </th>
+
+                        }
 
 
                     </tr>
@@ -56,12 +63,12 @@
                 </tbody>
 
             </table>
-            
+
 
         </div>
         <div class="col-8">
             <div class="cuadrojuego">
-                <div class="row" >
+                <div class="row">
 
                     @for (int fil = 0; fil < 10; fil++)
                     {
@@ -69,26 +76,26 @@
                         {
                             if (fil == 0 && col > 0)
                             {
-                                <div style="font-size:35px;" class="col btn btn-dark border casilla " disabled="true">@letra(col)</div>
+                                <div style="font-size:35px;" class="col btn btn-warning border casilla " disabled="true">@letra(col)</div>
                             }
                             else if (fil > 0 && fil < 9 && col == 0)
                             {
 
-                                <div style="font-size:35px;" class="col btn btn-dark border casilla" disabled="true">@fil</div>
+                                <div style="font-size:35px;" class="col btn btn-warning border casilla" disabled="true">@fil</div>
                             }
                             else if (fil == 9 && col >= 0)
                             {
 
-                                <div style="font-size:35px;" class="col btn btn-dark border casilla" disabled="true">@letra(col)</div>
+                                <div style="font-size:35px;" class="col btn btn-warning border casilla" disabled="true">@letra(col)</div>
 
                             }
                             else if (fil != 0 && col == 9)
                             {
-                                <div style="font-size:35px;" class="col btn btn-dark border casilla" disabled="true">@fil</div>
+                                <div style="font-size:35px;" class="col btn btn-warning border casilla" disabled="true">@fil</div>
                             }
-                           else if (fil == 0 && col == 0)
+                            else if (fil == 0 && col == 0)
                             {
-                                <div style="font-size:35px;" class="col btn btn-dark border casilla" disabled="true">@letra(col)</div>
+                                <div style="font-size:35px;" class="col btn btn-warning border casilla" disabled="true">@letra(col)</div>
 
                             }
 
@@ -157,10 +164,11 @@
                     <p style=" font-family:'Agency FB';font-size:30px;" class="text-white">
                         @if (Proyecto_201700404.Clases.Variables.turno == 1)
                         {
-                            @TempData["jugador"]
+                        <label>@user.nombreUsuario</label>  
                         }
-                        else { 
-                            <label>Invitado</label>
+                        else
+                        {
+                            <label>Maquina</label>
                         }
 
 
@@ -169,30 +177,31 @@
                 </div>
                 <div class="row justify-content-md-center  ">
                     <div style="width:50%; height:85px;" class="btn btn-success border">
-                        @if (TempData["jugador"] == "Invitado")
+                        @if (Proyecto_201700404.Clases.Variables.turno==2)
                         {
+                            <button class="ficha bg-white"></button>
+                            @*if (Proyecto_201700404.Clases.Variables.color2 == "negro")
+                        {
+                            <button class="ficha bg-dark"></button>
+                        }
+                        else if (Proyecto_201700404.Clases.Variables.color2 == "blanco")
+                        {
+                            <button class="ficha bg-white"></button>
+                        }*@
 
-                            if (Proyecto_201700404.Clases.Variables.color2 == "negro")
-                            {
-                                <button class="ficha bg-dark"></button>
-                            }
-                            else if(Proyecto_201700404.Clases.Variables.color2 == "blanco")
-                            {
-                                <button class="ficha bg-white"></button>
-                            }
 
-                            
                         }
                         else
                         {
-                            if (Proyecto_201700404.Clases.Variables.color1 == "negro")
-                            {
-                                <button class="ficha bg-dark"></button>
-                            }
-                            else  if (Proyecto_201700404.Clases.Variables.color1 == "blanco")
-                            {
-                                <button class="ficha bg-white"></button>
-                            }
+                            <button class="ficha bg-dark"></button>
+                            @*if (Proyecto_201700404.Clases.Variables.color1 == "negro")
+                        {
+                            <button class="ficha bg-dark"></button>
+                        }
+                        else if (Proyecto_201700404.Clases.Variables.color1 == "blanco")
+                        {
+                            <button class="ficha bg-white"></button>
+                        }*@
 
 
                         }
@@ -202,15 +211,20 @@
             </div>
             @if (Proyecto_201700404.Clases.Variables.Se_termino == 1)
             {
-                <button class="btn btn-danger my-2 my-sm-0 btn-lg ">@Html.ActionLink("Revelar al Ganador", "Ganador", "Jugar",new { area=""}, new { @class = " text-white" })</button>
+                <button class="btn btn-primary my-2 my-sm-0 btn-lg ">@Html.ActionLink("Revelar al Ganador", "Ganador", "Jugar", new { area = "" }, new { @class = " text-white" })</button>
 
+            }
+
+            @if (Proyecto_201700404.Clases.Variables.turno == 2)
+            {
+                <button class="btn btn-danger my-2 my-sm-0 btn-lg ">@Html.ActionLink("Ver Moviento Maquina", "MovMaquina", "Jugar", new { area = "" }, new { @class = " text-white" })</button>
             }
 
         </div>
 
     </div>
 
-    
+
 
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -220,7 +234,7 @@
                 var divId = $(this).attr("id");
 
                 $.ajax({
-                    url: "@Url.Action("PartidaMaquina")",
+                    url: "@Url.Action("ContraMaquina")",
                     type: "Post",
                     data: { idcelda: divId },
                     success: function (data) {

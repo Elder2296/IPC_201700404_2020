@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Proyecto_201700404.Models;
 
 namespace Proyecto_201700404.Clases
 {
     public class Variables
     {
         public static List<Ficha> fichas = new List<Ficha>();
+        public static List<Juego> juegos  = new List<Juego>();
         public static Casilla[,] tablero = new Casilla[8, 8];
+        public static int viene = 1;
+        public static Ganador ganador = new Ganador();
         public static int N_archivo = 0;
         public static int valides = 0;
         public static int mov_jugador1 = 0;

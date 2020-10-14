@@ -167,6 +167,9 @@
     <Compile Include="Models\ColorFicha.cs">
       <DependentUpon>BDatosiGame.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Juego.cs">
+      <DependentUpon>BDatosiGame.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Movimiento.cs">
       <DependentUpon>BDatosiGame.tt</DependentUpon>
     </Compile>
@@ -270,6 +273,9 @@
     <Content Include="Views\Jugar\Tablero.cshtml" />
     <Content Include="Views\Jugar\ConfiguracionFichas.cshtml" />
     <Content Include="Views\Jugar\Ganador.cshtml" />
+    <Content Include="Views\Jugar\TableroMaquina.cshtml" />
+    <Content Include="Views\Jugar\ContraMaquina.cshtml" />
+    <Content Include="Views\Player\Estadisticas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

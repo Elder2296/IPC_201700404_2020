@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\elari\Desktop\IPC2_201700404-master\Proyecto_201700404\Models\BDatosiGame.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\elari\Documents\FASES IPC2\IPC_201700404_2020\Proyecto_201700404\Models\BDatosiGame.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

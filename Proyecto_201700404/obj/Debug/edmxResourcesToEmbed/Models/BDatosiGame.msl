@@ -42,5 +42,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Juego">
+      <EntityTypeMapping TypeName="iGamegtModel.Juego">
+        <MappingFragment StoreEntitySet="Juego">
+          <ScalarProperty Name="fichas_perdedor" ColumnName="fichas_perdedor" />
+          <ScalarProperty Name="fichas_ganador" ColumnName="fichas_ganador" />
+          <ScalarProperty Name="mov_perdedor" ColumnName="mov_perdedor" />
+          <ScalarProperty Name="mov_ganador" ColumnName="mov_ganador" />
+          <ScalarProperty Name="perdedor" ColumnName="perdedor" />
+          <ScalarProperty Name="ganador" ColumnName="ganador" />
+          <ScalarProperty Name="idjugador" ColumnName="idjugador" />
+          <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

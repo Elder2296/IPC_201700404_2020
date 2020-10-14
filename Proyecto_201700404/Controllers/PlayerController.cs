@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using Proyecto_201700404.Models;
 using Proyecto_201700404.Models.ViewModels;
+using Proyecto_201700404.Clases;
 
 namespace Proyecto_201700404.Controllers
 {
+    
     public class PlayerController : Controller
     {
         // GET: Player
@@ -31,6 +33,15 @@ namespace Proyecto_201700404.Controllers
             }
 
 
+        }
+        public ActionResult Estadisticas() {
+            var jugador = (Proyecto_201700404.Models.USUARIO)Session["user"];
+            iGamegtEntities1 bdatos = new iGamegtEntities1();
+
+            Variables.juegos  = (from d in bdatos.Juego where d.idjugador == jugador.id_usuario select d).ToList();
+
+           
+            return View();
         }
 
 
