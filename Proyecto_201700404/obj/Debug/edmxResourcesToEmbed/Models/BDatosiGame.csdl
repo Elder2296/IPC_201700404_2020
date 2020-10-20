@@ -62,6 +62,7 @@
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="Juego" EntitySet="Juego" />
     </AssociationSet>
+    <EntitySet Name="Modalidad" EntityType="iGamegtModel.Modalidad" />
   </EntityContainer>
   <EntityType Name="ColorFicha">
     <Key>
@@ -96,4 +97,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Modalidad">
+    <Key>
+      <PropertyRef Name="idmodalidad" />
+    </Key>
+    <Property Name="idmodalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

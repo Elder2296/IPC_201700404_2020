@@ -42,17 +42,3 @@
 </div>
 }
 
-@if (ViewBag.listafichas == null)
-{
-    <label>No se puede mostrar esta mierda porque esta null</label>
-}
-else {
-    foreach (Proyecto_201700404.Models.ViewModels.Ficha item in ViewBag.listafichas)
-    {
-       <div class="row">
-           <label class="bg-primary text-white">@item.color  @item.columna  @item.fila</label>
-
-       </div>
-
-    }
-}

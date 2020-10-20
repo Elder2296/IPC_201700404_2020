@@ -30,5 +30,6 @@ namespace Proyecto_201700404.Models
         public virtual DbSet<Movimiento> Movimiento { get; set; }
         public virtual DbSet<ColorFicha> ColorFicha { get; set; }
         public virtual DbSet<Juego> Juego { get; set; }
+        public virtual DbSet<Modalidad> Modalidad { get; set; }
     }
 }

@@ -56,5 +56,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Modalidad">
+      <EntityTypeMapping TypeName="iGamegtModel.Modalidad">
+        <MappingFragment StoreEntitySet="Modalidad">
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="idmodalidad" ColumnName="idmodalidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -32,6 +32,13 @@
           <Property Name="fichas_ganador" Type="int" />
           <Property Name="fichas_perdedor" Type="int" />
         </EntityType>
+        <EntityType Name="Modalidad">
+          <Key>
+            <PropertyRef Name="idmodalidad" />
+          </Key>
+          <Property Name="idmodalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="25" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Movimiento">
@@ -88,6 +95,7 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
           <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ColorFicha" EntityType="Self.ColorFicha" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Juego" EntityType="Self.Juego" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modalidad" EntityType="Self.Modalidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movimiento" EntityType="Self.Movimiento" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -172,6 +180,7 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="Juego" EntitySet="Juego" />
           </AssociationSet>
+          <EntitySet Name="Modalidad" EntityType="iGamegtModel.Modalidad" />
         </EntityContainer>
         <EntityType Name="ColorFicha">
           <Key>
@@ -206,6 +215,13 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Modalidad">
+          <Key>
+            <PropertyRef Name="idmodalidad" />
+          </Key>
+          <Property Name="idmodalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -264,6 +280,14 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
                 <ScalarProperty Name="ganador" ColumnName="ganador" />
                 <ScalarProperty Name="idjugador" ColumnName="idjugador" />
                 <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modalidad">
+            <EntityTypeMapping TypeName="iGamegtModel.Modalidad">
+              <MappingFragment StoreEntitySet="Modalidad">
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="idmodalidad" ColumnName="idmodalidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

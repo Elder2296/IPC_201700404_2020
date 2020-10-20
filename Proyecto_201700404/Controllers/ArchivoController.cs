@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 using System.Xml.Linq;
+using Proyecto_201700404.Clases;
 
 namespace Proyecto_201700404.Controllers
 {
@@ -19,6 +20,8 @@ namespace Proyecto_201700404.Controllers
         }
         [HttpPost]
         public ActionResult Guardar(ArchivoViewModel archivo) {
+            Variables.fichas.Clear();
+            Variables.VaciarTablero();
             string Rutasitio = Server.MapPath("~/");
             string patharchivo = Path.Combine(Rutasitio+"/Files/"+archivo.CargarArchivo.FileName+".xml");
             if(!ModelState.IsValid){
@@ -30,19 +33,28 @@ namespace Proyecto_201700404.Controllers
             XDocument docxml = XDocument.Load(patharchivo);
 
             var consulta = from datos in docxml.Descendants("ficha")
-                           select new MovimientoViewModel
+                           select new Ficha
                            {
                                color=datos.Element("color").Value,
-                               col=Columna(datos.Element("columna").Value),
+                               columna=Columna(datos.Element("columna").Value),
                                fila=int.Parse(datos.Element("fila").Value)
                            };
 
-            List<MovimientoViewModel> fichas = consulta.ToList();
+            Variables.fichas = consulta.ToList();
+            Variables.viene = 3;
+            Variables.fichasbasicas();
+            foreach (var item in Variables.fichas)
+            {
+                Variables.tablero[item.fila-1,item.columna-1].estado="ocupado";
+
+            }
+
+            Variables.turno = 1;
             
 
-            @TempData["Message"] = "Se cargo el archivo";
+            //@TempData["Message"] = "Se cargo el archivo";
 
-            @TempData["lista"] = fichas;
+            //@TempData["lista"] = fichas;
             //ViewBag.listafichas = fichas;
 
             //ViewBag
@@ -53,7 +65,7 @@ namespace Proyecto_201700404.Controllers
 
             //return RedirectToAction("Partida","Player");
 
-            return RedirectToAction("Partida","Player");
+            return RedirectToAction("ContraMaquina", "Jugar");
         }
 
         private int Columna(string letra) {

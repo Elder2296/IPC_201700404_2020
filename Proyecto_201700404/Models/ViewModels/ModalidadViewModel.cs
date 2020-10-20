@@ -6,14 +6,9 @@ using System.Web;
 
 namespace Proyecto_201700404.Models.ViewModels
 {
-    public class Elegirfichas
+    public class ModalidadViewModel
     {
         [Required]
-        public int idcolor1 { set; get; }
-        [Required]
         public int idmodalidad { set; get; }
-
-        public List<ColorFicha> colores { set; get; }
-
     }
 }

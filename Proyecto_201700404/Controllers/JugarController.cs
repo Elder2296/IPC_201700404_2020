@@ -171,43 +171,99 @@ namespace Proyecto_201700404.Controllers
             var gan = (Proyecto_201700404.Models.USUARIO)Session["user"];
             if (fichasblancas > fichasnegras)
             {
-                
+                if (Variables.modalidad == 1) {
+
+                    if (Variables.viene == 1)
+                    {
+                        ganador.ganador = "Invitado";
+                    }
+                    else
+                    {
+                        ganador.ganador = "Maquina";
+                    }
+                    ganador.perdedor = gan.nombreUsuario;
+                    ganador.fichasGanador = fichasblancas;
+                    ganador.fichasPerdedor = fichasnegras;
+
+
+                    ganador.movimientosGanador = Variables.mov_jugador2;
+                    ganador.movimeintoPerdedor = Variables.mov_jugador1;
+
+                } else if (Variables.modalidad==2) {
+
+                    if (Variables.viene == 1)
+                    {
+                        ganador.perdedor = "Invitado";
+                    }
+                    else
+                    {
+                        ganador.perdedor = "Maquina";
+                    }
+                    ganador.ganador = gan.nombreUsuario;
+                    ganador.fichasGanador = fichasnegras;
+                    ganador.fichasPerdedor = fichasblancas;
+
+
+                    ganador.movimientosGanador = Variables.mov_jugador1;
+                    ganador.movimeintoPerdedor = Variables.mov_jugador2;
+
+                }
 
                 //ganador.ganador = gan.nombreUsuario;
-                if (Variables.viene == 1)
-                {
-                    ganador.ganador = "Invitado";
-                }
-                else
-                {
-                    ganador.ganador = "Maquina";
-                }
-                ganador.perdedor = gan.nombreUsuario;
-                ganador.fichasGanador = fichasblancas ;
-                ganador.fichasPerdedor = fichasnegras;
+                
+                //ganador.perdedor = gan.nombreUsuario; COMENTADO POR LA NUEVA MODALIDAD DE JUEGO
+                //ganador.fichasGanador = fichasblancas ;
+                //ganador.fichasPerdedor = fichasnegras;
 
                 
-                ganador.movimientosGanador = Variables.mov_jugador2;
-                ganador.movimeintoPerdedor = Variables.mov_jugador1;
+                //ganador.movimientosGanador = Variables.mov_jugador2;
+                //ganador.movimeintoPerdedor = Variables.mov_jugador1;
 
 
             }
             else if (fichasnegras > fichasblancas)
             {
 
-                ganador.ganador = gan.nombreUsuario;
-                if (Variables.viene == 1)
+                if (Variables.modalidad == 1)
                 {
-                    ganador.perdedor = "Invitado";
+                    ganador.ganador = gan.nombreUsuario;
+                    if (Variables.viene == 1)
+                    {
+                        ganador.perdedor = "Invitado";
+                    }
+                    else
+                    {
+                        ganador.perdedor = "Maquina";
+                    }
+
+                    ganador.fichasGanador = fichasnegras;
+                    ganador.fichasPerdedor = fichasblancas;
+                    ganador.movimientosGanador = Variables.mov_jugador1;
+                    ganador.movimeintoPerdedor = Variables.mov_jugador2;
+
+
                 }
-                else {
-                    ganador.perdedor = "Maquina";
+                else if(Variables.modalidad==2) {
+
+                    ganador.perdedor = gan.nombreUsuario;
+                    if (Variables.viene == 1)
+                    {
+                        ganador.ganador = "Invitado";
+                    }
+                    else
+                    {
+                        ganador.ganador = "Maquina";
+                    }
+
+                    ganador.fichasGanador = fichasblancas;
+                    ganador.fichasPerdedor = fichasnegras;
+                    ganador.movimientosGanador = Variables.mov_jugador2;
+                    ganador.movimeintoPerdedor = Variables.mov_jugador1;
+
+
                 }
+
                 
-                ganador.fichasGanador = fichasnegras ;
-                ganador.fichasPerdedor = fichasblancas;
-                ganador.movimientosGanador = Variables.mov_jugador1;
-                ganador.movimeintoPerdedor = Variables.mov_jugador2;
             }
             else if (fichasnegras==fichasblancas) {
                 ganador.ganador = "Empate";
@@ -268,9 +324,11 @@ namespace Proyecto_201700404.Controllers
         [HttpPost]
         public ActionResult ConfiguracionFichas(Elegirfichas color)
         {
+            System.Diagnostics.Debug.WriteLine("SE HA ESCOGIDO LA MODALIDAD DE JUEGO: " + color.idmodalidad);
 
             if (ModelState.IsValid)
             {
+                Variables.modalidad = color.idmodalidad;
                 //System.Diagnostics.Debug.WriteLine("se para la partida");
                 System.Diagnostics.Debug.WriteLine("Colores elejidos: " + color.idcolor1);
                 //System.Diagnostics.Debug.WriteLine("Colores elegidos 2: "+ color.idcolor2);
@@ -650,7 +708,7 @@ namespace Proyecto_201700404.Controllers
                 @TempData["jugador"] = jugador;
 
             }
-            else {
+            else if (Variables.viene == 2) {
                 this.Verificar();
             }
             

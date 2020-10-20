@@ -9,9 +9,10 @@
         <EntityTypeShape EntityType="iGamegtModel.USUARIO" Width="1.5" PointX="3.125" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="iGamegtModel.Movimiento" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="iGamegtModel.FK__USUARIO__id_ciud__4D94879B" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="iGamegtModel.ColorFicha" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="iGamegtModel.ColorFicha" Width="1.5" PointX="1" PointY="4.125" />
         <EntityTypeShape EntityType="iGamegtModel.Juego" Width="1.5" PointX="5.875" PointY="0.75" />
         <AssociationConnector Association="iGamegtModel.FK_Usuario" />
+        <EntityTypeShape EntityType="iGamegtModel.Modalidad" Width="1.5" PointX="6.75" PointY="5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
