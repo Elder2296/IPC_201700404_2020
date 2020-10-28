@@ -12,12 +12,15 @@
           <Property Name="id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre_pais" Type="varchar" MaxLength="50" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'iGamegt.dbo.ColorFicha' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ColorFicha">
           <Key>
             <PropertyRef Name="idcolor" />
           </Key>
           <Property Name="idcolor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="color" Type="varchar" MaxLength="25" />
+          <Property Name="color" Type="varchar" MaxLength="20" />
+          <Property Name="clase" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Juego">
           <Key>
@@ -93,10 +96,16 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
         </Association>
         <EntityContainer Name="iGamegtModelStoreContainer">
           <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ColorFicha" EntityType="Self.ColorFicha" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Juego" EntityType="Self.Juego" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modalidad" EntityType="Self.Modalidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColorFicha" EntityType="Self.ColorFicha" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ColorFicha].[idcolor] AS [idcolor], 
+    [ColorFicha].[color] AS [color], 
+    [ColorFicha].[clase] AS [clase]
+    FROM [dbo].[ColorFicha] AS [ColorFicha]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Movimiento" EntityType="Self.Movimiento" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Movimiento].[idMovimiento] AS [idMovimiento], 
@@ -174,21 +183,14 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
             <End Role="CIUDAD" EntitySet="CIUDAD" />
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
-          <EntitySet Name="ColorFicha" EntityType="iGamegtModel.ColorFicha" />
           <EntitySet Name="Juego" EntityType="iGamegtModel.Juego" />
           <AssociationSet Name="FK_Usuario" Association="iGamegtModel.FK_Usuario">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="Juego" EntitySet="Juego" />
           </AssociationSet>
           <EntitySet Name="Modalidad" EntityType="iGamegtModel.Modalidad" />
+          <EntitySet Name="ColorFicha" EntityType="iGamegtModel.ColorFicha" />
         </EntityContainer>
-        <EntityType Name="ColorFicha">
-          <Key>
-            <PropertyRef Name="idcolor" />
-          </Key>
-          <Property Name="idcolor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="color" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Juego">
           <Key>
             <PropertyRef Name="idPartida" />
@@ -221,6 +223,14 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
           </Key>
           <Property Name="idmodalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ColorFicha">
+          <Key>
+            <PropertyRef Name="idcolor" />
+          </Key>
+          <Property Name="idcolor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="clase" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -261,14 +271,6 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ColorFicha">
-            <EntityTypeMapping TypeName="iGamegtModel.ColorFicha">
-              <MappingFragment StoreEntitySet="ColorFicha">
-                <ScalarProperty Name="color" ColumnName="color" />
-                <ScalarProperty Name="idcolor" ColumnName="idcolor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Juego">
             <EntityTypeMapping TypeName="iGamegtModel.Juego">
               <MappingFragment StoreEntitySet="Juego">
@@ -288,6 +290,15 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
               <MappingFragment StoreEntitySet="Modalidad">
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="idmodalidad" ColumnName="idmodalidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColorFicha">
+            <EntityTypeMapping TypeName="iGamegtModel.ColorFicha">
+              <MappingFragment StoreEntitySet="ColorFicha">
+                <ScalarProperty Name="clase" ColumnName="clase" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="idcolor" ColumnName="idcolor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -8,6 +8,7 @@ namespace Proyecto_201700404.Clases
 {
     public class Variables
     {
+        public static Partida partida = new Partida();
         public static List<Ficha> fichas = new List<Ficha>();
         public static List<Juego> juegos  = new List<Juego>();
         public static Casilla[,] tablero = new Casilla[8, 8];

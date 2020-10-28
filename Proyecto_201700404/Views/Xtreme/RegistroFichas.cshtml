@@ -1,0 +1,98 @@
+﻿@model Proyecto_201700404.Models.ViewModels.ColorFichaViewModel
+@using Proyecto_201700404.Models
+@using Proyecto_201700404.Clases
+@{
+    ViewBag.Title = "RegistroFichas";
+    Layout = "~/Views/Master/CampodeJuego.cshtml";
+    iGamegtEntities1 db = new iGamegtEntities1();
+    Partida partida = Variables.partida;
+}
+
+
+
+    <div style="border-radius:10px; width:600px; height:50%; position:absolute; top:60%; left:50%; transform:translate(-47%,-50%); @*background-color:rgba(0, 0, 0,.8)*@">
+        <div style="margin-left: 50%; position: absolute; margin-top: 25%; width: 50%; height: 80%; transform: translate(-50%,-50%);" class="">
+            <p style=" font-family:'Agency FB';font-size:25px; " class="text-center text-white">
+                Cada jugador podra elegir máximo 5 colores de fichas y mínimo 1.
+
+            </p>
+            @using (Html.BeginForm("FichasHost", "Xtreme", FormMethod.Post))
+            {
+                <div class="form-group row">
+                    @Html.DropDownListFor(d => d.idcolor, new SelectList(db.ColorFicha, "idcolor", "color"), "Selecione color", new { @class = " col-sm-8 form-control" })
+                    <div class="col-sm-4">
+                        <button value="Ir a partida" type="submit" class="form-control btn btn-primary">Elegir</button>
+
+                    </div>
+
+                </div>
+
+
+            }
+            @if (partida.JugadorLocal().MisFichas().Count() != 0)
+            {
+                <div class="row justify-content-md-center">
+                    @foreach (var ficha in partida.JugadorLocal().MisFichas())
+                    {
+                        <div style="width:60px;height:60px;" class="bg-orange">
+                            <button style="height:100%;width:100%;border-radius:100%;border-color:white;" class="@ficha.clase"></button>
+
+                        </div>
+
+
+                    }
+
+                </div>
+                <br />
+            }
+
+
+
+
+            @using (Html.BeginForm("FichasInvitado", "Xtreme", FormMethod.Post))
+            {
+                <div class="form-group row">
+                    @Html.DropDownListFor(d => d.idcolor, new SelectList(db.ColorFicha, "idcolor", "color"), "Selecione color", new { @class = " col-sm-8 form-control" })
+                    <div class="col-sm-4">
+                        <button value="Ir a partida" type="submit" class="form-control btn btn-primary">Elegir</button>
+
+                    </div>
+
+                </div>
+
+
+            }
+            @if (partida.JugadorInvitado().MisFichas().Count() != 0)
+            {
+                <div class="row justify-content-md-center">
+                    @foreach (var ficha in partida.JugadorInvitado().MisFichas())
+                    {
+                        <div style="width:60px;height:60px;" class="bg-orange">
+                            <button style="height:100%;width:100%;border-radius:100%;border-color:white;" class="@ficha.clase"></button>
+
+                        </div>
+
+
+                    }
+
+                </div>
+                <br />
+            }
+
+            @using (Html.BeginForm("Requisitos", "Xtreme", FormMethod.Post))
+            {
+                <div class="form-group row">
+                    <button value="Ir a partida" type="submit" class="form-control btn btn-primary">
+                        Ir a partida   <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                        </svg>
+                    </button>
+
+                </div>
+            }
+
+
+        </div>
+
+    </div>
+

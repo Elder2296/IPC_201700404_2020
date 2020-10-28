@@ -34,14 +34,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ColorFicha">
-      <EntityTypeMapping TypeName="iGamegtModel.ColorFicha">
-        <MappingFragment StoreEntitySet="ColorFicha">
-          <ScalarProperty Name="color" ColumnName="color" />
-          <ScalarProperty Name="idcolor" ColumnName="idcolor" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Juego">
       <EntityTypeMapping TypeName="iGamegtModel.Juego">
         <MappingFragment StoreEntitySet="Juego">
@@ -61,6 +53,15 @@
         <MappingFragment StoreEntitySet="Modalidad">
           <ScalarProperty Name="tipo" ColumnName="tipo" />
           <ScalarProperty Name="idmodalidad" ColumnName="idmodalidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ColorFicha">
+      <EntityTypeMapping TypeName="iGamegtModel.ColorFicha">
+        <MappingFragment StoreEntitySet="ColorFicha">
+          <ScalarProperty Name="clase" ColumnName="clase" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="idcolor" ColumnName="idcolor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

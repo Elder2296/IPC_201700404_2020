@@ -7,12 +7,15 @@
     <Property Name="id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre_pais" Type="varchar" MaxLength="50" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'iGamegt.dbo.ColorFicha' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ColorFicha">
     <Key>
       <PropertyRef Name="idcolor" />
     </Key>
     <Property Name="idcolor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="color" Type="varchar" MaxLength="25" />
+    <Property Name="color" Type="varchar" MaxLength="20" />
+    <Property Name="clase" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="Juego">
     <Key>
@@ -88,10 +91,16 @@ advertencia 6002: La tabla o vista 'iGamegt.dbo.Movimiento' no tiene definida ni
   </Association>
   <EntityContainer Name="iGamegtModelStoreContainer">
     <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ColorFicha" EntityType="Self.ColorFicha" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Juego" EntityType="Self.Juego" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modalidad" EntityType="Self.Modalidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ColorFicha" EntityType="Self.ColorFicha" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ColorFicha].[idcolor] AS [idcolor], 
+    [ColorFicha].[color] AS [color], 
+    [ColorFicha].[clase] AS [clase]
+    FROM [dbo].[ColorFicha] AS [ColorFicha]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="Movimiento" EntityType="Self.Movimiento" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Movimiento].[idMovimiento] AS [idMovimiento], 

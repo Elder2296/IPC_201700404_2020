@@ -11,5 +11,7 @@ namespace Proyecto_201700404.Clases
         public int columna { set; get; }
         public int fila { set; get; }
 
+        public string clase { set; get; }
+
     }
 }

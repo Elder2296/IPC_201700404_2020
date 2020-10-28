@@ -133,6 +133,8 @@
     <Compile Include="Clases\Control.cs" />
     <Compile Include="Clases\Ficha.cs" />
     <Compile Include="Clases\Ganador.cs" />
+    <Compile Include="Clases\Jugador.cs" />
+    <Compile Include="Clases\Partida.cs" />
     <Compile Include="Clases\Posibilidad.cs" />
     <Compile Include="Clases\Variables.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JugarController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\XtremeController.cs" />
     <Compile Include="Filters\FilterSesion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,8 +187,10 @@
     <Compile Include="Models\ViewModels\ColorFichaViewModel.cs" />
     <Compile Include="Models\ViewModels\Elegirfichas.cs" />
     <Compile Include="Models\ViewModels\FichaViewModel.cs" />
+    <Compile Include="Models\ViewModels\InvitadoViewModel.cs" />
     <Compile Include="Models\ViewModels\ModalidadViewModel.cs" />
     <Compile Include="Models\ViewModels\MovimientoViewModel.cs" />
+    <Compile Include="Models\ViewModels\TableroViewModel.cs" />
     <Compile Include="Models\ViewModels\UsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -280,6 +285,11 @@
     <Content Include="Views\Jugar\TableroMaquina.cshtml" />
     <Content Include="Views\Jugar\ContraMaquina.cshtml" />
     <Content Include="Views\Player\Estadisticas.cshtml" />
+    <Content Include="Views\Xtreme\RegistroInvitado.cshtml" />
+    <Content Include="Views\Xtreme\RegistroFichas.cshtml" />
+    <Content Include="Views\Xtreme\Xtreme.cshtml" />
+    <Content Include="Views\Xtreme\Tablero.cshtml" />
+    <Content Include="Views\Xtreme\ConfiguracionTablero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

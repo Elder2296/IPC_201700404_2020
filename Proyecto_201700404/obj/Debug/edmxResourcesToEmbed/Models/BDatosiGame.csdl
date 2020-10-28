@@ -56,21 +56,14 @@
       <End Role="CIUDAD" EntitySet="CIUDAD" />
       <End Role="USUARIO" EntitySet="USUARIO" />
     </AssociationSet>
-    <EntitySet Name="ColorFicha" EntityType="iGamegtModel.ColorFicha" />
     <EntitySet Name="Juego" EntityType="iGamegtModel.Juego" />
     <AssociationSet Name="FK_Usuario" Association="iGamegtModel.FK_Usuario">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="Juego" EntitySet="Juego" />
     </AssociationSet>
     <EntitySet Name="Modalidad" EntityType="iGamegtModel.Modalidad" />
+    <EntitySet Name="ColorFicha" EntityType="iGamegtModel.ColorFicha" />
   </EntityContainer>
-  <EntityType Name="ColorFicha">
-    <Key>
-      <PropertyRef Name="idcolor" />
-    </Key>
-    <Property Name="idcolor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="color" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="Juego">
     <Key>
       <PropertyRef Name="idPartida" />
@@ -103,5 +96,13 @@
     </Key>
     <Property Name="idmodalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ColorFicha">
+    <Key>
+      <PropertyRef Name="idcolor" />
+    </Key>
+    <Property Name="idcolor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="clase" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

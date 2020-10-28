@@ -16,5 +16,6 @@ namespace Proyecto_201700404.Models
     {
         public int idcolor { get; set; }
         public string color { get; set; }
+        public string clase { get; set; }
     }
 }
