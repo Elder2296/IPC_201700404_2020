@@ -134,7 +134,8 @@ namespace Proyecto_201700404.Controllers
         public ActionResult ConfiguracionTablero(TableroViewModel tablero) {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Xtreme");
+                Variables.partida.IniciarTablero(tablero.Fila,tablero.Columna);
+                return RedirectToAction("Jugar","JugarXtreme");
             }
             else {
                 return View();

@@ -8,11 +8,30 @@ namespace Proyecto_201700404.Clases
     public class Jugador
     {
         //public int identificador { set; get; }
+        private int turnoficha;
+        
         public string Alias { set; get; }
-
+        
         List<Ficha> misfichas;
         public Jugador() { 
             misfichas= new List<Ficha>();
+            this.turnoficha = 0;
+        }
+
+        public Ficha ficha_a_Colocar() {
+            Ficha ficha;
+
+            if (this.turnoficha > this.misfichas.Count()-1)
+            {
+                this.turnoficha = 0;
+            }
+            
+            ficha=this.misfichas.ElementAt(this.turnoficha);
+
+            this.turnoficha = this.turnoficha + 1;
+            return ficha;
+            
+
 
         }
         public List<Ficha> MisFichas() {

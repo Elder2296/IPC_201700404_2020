@@ -57,6 +57,14 @@
                         </style>
                     }
 
+                    <style>
+                        .ficha {
+                            height: 100%;
+                            width: 100%;
+                            border-radius: 100% !important;
+                            border-color: white;
+                        }   
+                    </style>
 
 
 
@@ -98,38 +106,21 @@
                             }
                             else
                             {
-                                <div style="height:@altura  vh;" class="col btn btn-success border " id="@fil.ToString()-@col.ToString()">
-                                </div>
+                            <div style="height:@altura  vh;" class="col btn btn-success border " id="@fil.ToString()-@col.ToString()">
+                                @foreach (var item in partida.getListaFichas())
+                                {
+                                    if (item.fila == fil && item.columna == col)
+                                    {
+                                        <button class="ficha @item.clase"></button>
+
+                                    }
+
+                                }
+                            </div>
                             }
 
 
-                            @*else if (fil > 0 && fil < partida.getColumnasTabler() + 2 && col == 0)
-                                        {
-
-                                            <div style="height:@altura vh;" class="col btn btn-dark border ">@fil</div>
-                                        }
-
-                                        else if (fil == partida.getFilasTablero() + 1 && col >= 0 && col < partida.getColumnasTabler() + 2)
-                                        {
-
-                                            <div style="height:@altura  vh;" class="col btn btn-dark border">@letra(col)</div>
-
-                                        }
-
-                                        else if (fil != 0 && col == partida.getColumnasTabler() + 1)
-                                        {
-                                            <div style="height:@altura  vh;" class="col btn btn-dark border " disabled="true">@fil</div>
-                                        }
-                                        else if (fil == 0 && col == 0)
-                                        {
-                                            <div style="height:@altura vh;" class="col btn btn-dark border " disabled="true">@letra(col)</div>
-
-                                        }
-                                        else {
-                                        <div style="height:@altura  vh;" class="col btn btn-success border " id="@fil.ToString()-@col.ToString()">
-
-                                        </div>
-                                }*@
+                 
 
 
 
@@ -153,6 +144,23 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $("#tablero div ").on("click", function (event) {
+        var divId = $(this).attr("id");
+
+        $.ajax({
+            url: "@Url.Action("Jugar")",
+            type: "Post",
+            data: { idcelda: divId },
+            success: function (data) {
+                $("#tablero").html(data);
+            }
+        }
+        );
+    });
+
+</script>
 
 
 @{

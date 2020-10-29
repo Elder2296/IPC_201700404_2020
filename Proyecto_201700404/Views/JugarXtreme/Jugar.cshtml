@@ -50,24 +50,24 @@
             <div class="row justify-content-md-center">
                 <div style="background-color:rgba(128, 128, 128,.4);border-radius:10px;" class="col">
                     <label style=" font-family:'Agency FB';font-size:25px;" class="row justify-content-md-center text-white">@partida.JugadorLocal().Alias</label>
-                  
+
                     <div class="row justify-content-md-center">
-                    @foreach (var ficha in partida.JugadorLocal().MisFichas())
-                    {
-                        <div style="width:60px;height:60px;" class="bg-orange">
-                            <button style="height:100%;width:100%;border-radius:100%;border-color:white;" class="@ficha.clase"></button>
+                        @foreach (var ficha in partida.JugadorLocal().MisFichas())
+                        {
+                            <div style="width:60px;height:60px;" class="bg-orange">
+                                <button style="height:100%;width:100%;border-radius:100%;border-color:white;" class="@ficha.clase"></button>
 
-                        </div>
+                            </div>
 
 
-                    }
+                        }
                     </div>
 
                 </div>
                 <div class="col">
                     <div style="background-color:rgba(128, 128, 128,.9);border-radius:10px ;" class="col">
                         <label style=" font-family:'Agency FB';font-size:25px;" class="row justify-content-md-center text-white">@partida.JugadorInvitado().Alias</label>
-                        
+
                         <div class="row justify-content-md-center">
                             @foreach (var ficha in partida.JugadorInvitado().MisFichas())
                             {
@@ -80,7 +80,7 @@
                             }
 
                         </div>
-                        
+
 
                     </div>
 

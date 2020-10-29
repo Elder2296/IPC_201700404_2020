@@ -16,6 +16,8 @@
                 Cada jugador podra elegir máximo 5 colores de fichas y mínimo 1.
 
             </p>
+            <br />
+            <label style="background-color:rgba(0, 0, 0,.9);border-radius:5px; font-family:'Agency FB';font-size:25px; " class="text-center text-white">@partida.JugadorLocal().Alias</label>
             @using (Html.BeginForm("FichasHost", "Xtreme", FormMethod.Post))
             {
                 <div class="form-group row">
@@ -48,7 +50,7 @@
 
 
 
-
+            <label style=" background-color:rgba(0, 0, 0,.9);border-radius:5px;  font-family:'Agency FB';font-size:25px; " class="text-center text-white">@partida.JugadorInvitado().Alias</label>
             @using (Html.BeginForm("FichasInvitado", "Xtreme", FormMethod.Post))
             {
                 <div class="form-group row">

@@ -142,6 +142,7 @@
     <Compile Include="Controllers\Contenedor.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JugarController.cs" />
+    <Compile Include="Controllers\JugarXtremeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\XtremeController.cs" />
     <Compile Include="Filters\FilterSesion.cs" />
@@ -290,6 +291,8 @@
     <Content Include="Views\Xtreme\Xtreme.cshtml" />
     <Content Include="Views\Xtreme\Tablero.cshtml" />
     <Content Include="Views\Xtreme\ConfiguracionTablero.cshtml" />
+    <Content Include="Views\JugarXtreme\Jugar.cshtml" />
+    <Content Include="Views\JugarXtreme\Tablero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
