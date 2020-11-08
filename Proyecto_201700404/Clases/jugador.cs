@@ -9,13 +9,20 @@ namespace Proyecto_201700404.Clases
     {
         //public int identificador { set; get; }
         private int turnoficha;
-        
+        private int movimientos;
         public string Alias { set; get; }
         
         List<Ficha> misfichas;
         public Jugador() { 
             misfichas= new List<Ficha>();
             this.turnoficha = 0;
+            this.movimientos = 0;
+        }
+        public void Movimientos() {
+            this.movimientos = this.movimientos + 1;
+        }
+        public int getMovimientos() {
+            return this.movimientos;
         }
 
         public Ficha ficha_a_Colocar() {
@@ -33,6 +40,11 @@ namespace Proyecto_201700404.Clases
             
 
 
+        }
+        public Ficha getFichaTurno() {
+            Ficha ficha;
+            ficha = this.misfichas.ElementAt(this.turnoficha);
+            return ficha;
         }
         public List<Ficha> MisFichas() {
             return this.misfichas;
@@ -61,6 +73,7 @@ namespace Proyecto_201700404.Clases
         public void agregarFicha(Ficha ficha) {
             this.misfichas.Add(ficha);
         }
+        
         public int id { set; get; }
         public string nombre { set; get; }
 

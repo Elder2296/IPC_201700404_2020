@@ -1,4 +1,7 @@
 ﻿@using Proyecto_201700404.Clases
+
+
+
 @{
     Partida partida = Proyecto_201700404.Clases.Variables.partida;
     int altura = 100 / (partida.getColumnasTabler() + 2);
@@ -7,6 +10,131 @@
 <div class="container">
     <div class="row" id="tablero">
         <div class="col-2">
+            <table class="table table-sm table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Movimientos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            @partida.JugadorLocal().Alias :
+                        </th>
+                        <th>@partida.JugadorLocal().getMovimientos()</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            @partida.JugadorInvitado().Alias :
+                        </th>
+                        <th>@partida.JugadorInvitado().getMovimientos()</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Valides de la Jugada
+                        </th>
+
+                    </tr>
+
+                    <tr>
+
+                        @if (Variables.valides == 0)
+                        {
+                            <th>
+                                Aun no empieza la partida
+                            </th>
+
+                        }
+                        else if (Variables.valides == 1)
+                        {
+                            <th>
+                                La jugada es valida @Variables.validesde
+                            </th>
+                        }
+                        else if (Variables.valides == 2)
+                        {
+                            <th>
+                                La jugada es invalida @Variables.validesde
+                            </th>
+
+                        }
+
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+
+
+            <div style="height:20%; border-radius:5px;" class="bg-dark">
+                <div class="row  justify-content-md-center">
+                    <label style=" font-family:'Agency FB';font-size:50px;" class="text-white">Turno de:</label>
+                </div>
+                <div class="row justify-content-md-center ">
+                    <p style=" font-family:'Agency FB';font-size:30px;" class="text-white">
+                        @if (partida.getTurno() == 1)
+                        {
+                            <label>@partida.JugadorLocal().Alias</label>
+                        }
+                        else
+                        {
+                            <label>@partida.JugadorInvitado().Alias</label>
+                        }
+
+
+
+                    </p>
+                </div>
+                @*<div class="row justify-content-md-center  ">
+                    <div style="width:50%; height:85px;" class="btn btn-success border">
+                        @if (partida.getTurno() == 1)
+                        {
+                            <button style="height:100%;width:100%; border-radius:100%;" class="@partida.JugadorLocal().getFichaTurno().clase"></button>
+
+                          
+
+
+                        }
+                        else
+                        {
+                            <button style="height:100%;width:100%; border-radius:100%;" class="@partida.JugadorInvitado().getFichaTurno().clase"></button>
+
+
+
+                        }
+                    </div>
+                </div>*@
+
+            </div>
+            @if (Proyecto_201700404.Clases.Variables.Se_termino == 1)
+            {
+
+                using (Html.BeginForm("verGanador", "JugarXtreme", FormMethod.Post))
+                {
+                    <div class="form-group row">
+                        <button value="Ir a partida" type="submit" class="form-control btn btn-primary">
+                            Revelar al ganador  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                            </svg>
+                        </button>
+
+                    </div>
+                }
+
+
+               
+
+            }
+
+
+
 
 
         </div>

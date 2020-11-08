@@ -9,31 +9,31 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Ganador</title>
+    <title>verGanador</title>
     <link href="~/Content/Ganador.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body class="variable">
-
     <div style="width: 40%;height:auto; background-color: rgba(255, 255, 255,.75); border-radius:10px; position:absolute; top:50%; left:50%; transform:translate(-47%,-50%)">
         <div class="bg-dark " style="border-radius: 10px 10px 0px 0px;">
             <h1 class="text-white text-center">Ganador</h1>
-            
+
             @if (Proyecto_201700404.Clases.Variables.ganador.ganador == "Empate")
             {
                 <h3 class="text-white text-center"> HUBO UN EMPATE</h3>
             }
-            else { 
-            <h3 class="text-white text-center">@Proyecto_201700404.Clases.Variables.ganador.ganador has ganado </h3>
+            else
+            {
+                <h3 class="text-white text-center">@Proyecto_201700404.Clases.Variables.ganador.ganador has ganado </h3>
             }
-                    
-               
+
+
 
 
         </div>
         <table class="table">
             <thead class="thead-dark">
-                
+
                 <tr>
                     <th scope="col">
                         Jugador
@@ -65,13 +65,13 @@
 
                 <tr>
                     <td>
-                         @Proyecto_201700404.Clases.Variables.ganador.perdedor
+                        @Proyecto_201700404.Clases.Variables.ganador.perdedor
                     </td>
                     <td>
                         @Proyecto_201700404.Clases.Variables.ganador.movimeintoPerdedor
                     </td>
                     <td>
-                         @Proyecto_201700404.Clases.Variables.ganador.fichasPerdedor
+                        @Proyecto_201700404.Clases.Variables.ganador.fichasPerdedor
                     </td>
 
                 </tr>
@@ -79,25 +79,16 @@
             </tbody>
 
         </table>
-       
+        <div class="form-group">
 
-            @using (Html.BeginForm("Requisitos", "Xtreme", FormMethod.Post))
-            {
-                <div class="form-group row">
-                    <button value="Ir a partida" type="submit" class="form-control btn btn-primary">
-                        Ir a partida   <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                        </svg>
-                    </button>
+            <button class=" form-control btn btn-warning center-block">
+                @Html.ActionLink("Regresar a menu principal", "Player", "Player", new { area = "" }, new { @class = " text-white" })
 
-                </div>
-            }
-        
+            </button>
+        </div>
 
-        
+
 
     </div>
-    
-    
 </body>
 </html>

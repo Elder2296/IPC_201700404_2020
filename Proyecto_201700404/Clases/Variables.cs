@@ -17,6 +17,7 @@ namespace Proyecto_201700404.Clases
         public static Ganador ganador = new Ganador();
         public static int N_archivo = 0;
         public static int valides = 0;
+        public static string validesde = "";
         public static int mov_jugador1 = 0;
         public static int mov_jugador2 = 0;
         public static int Se_termino = 0;

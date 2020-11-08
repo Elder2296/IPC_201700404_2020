@@ -294,6 +294,7 @@
     <Content Include="Views\Xtreme\ConfiguracionTablero.cshtml" />
     <Content Include="Views\JugarXtreme\Jugar.cshtml" />
     <Content Include="Views\JugarXtreme\Tablero.cshtml" />
+    <Content Include="Views\JugarXtreme\verGanador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
