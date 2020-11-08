@@ -13,5 +13,7 @@ namespace Proyecto_201700404.Clases
 
         public string clase { set; get; }
 
+        public int Turnodueño { set; get; }
+
     }
 }

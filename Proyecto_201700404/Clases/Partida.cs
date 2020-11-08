@@ -18,7 +18,9 @@ namespace Proyecto_201700404.Clases
             this.turnojugador = 1;
         
         }
-        
+        public Casilla[,] getTablero() {
+            return this.tablero;
+        }
         public void IniciarPartida() {
             local = new Jugador();
             invitado = new Jugador();
@@ -64,19 +66,58 @@ namespace Proyecto_201700404.Clases
             Ficha aux = new Ficha();
             ficha.fila = fil;
             ficha.columna = col;
-
+            System.Diagnostics.Debug.WriteLine("LA LISTA DE FICHAS TIENE TAMAÑO: "+this.fichas.Count());
             if (this.turnojugador == 1) {
                 aux = this.JugadorLocal().ficha_a_Colocar();
                 ficha.color = aux.color;
                 ficha.clase = aux.clase;
+                ficha.Turnodueño = aux.Turnodueño;
 
-                System.Diagnostics.Debug.WriteLine("Ficha COLOR: "+ficha.color+" CLASE: "+ficha.clase+" FILA: "+ficha.fila+" COLUMNA: "+ficha.columna);
+                //System.Diagnostics.Debug.WriteLine("Ficha COLOR: "+ficha.color+" CLASE: "+ficha.clase+" FILA: "+ficha.fila+" COLUMNA: "+ficha.columna+" TURNO DUEÑO: "+ficha.Turnodueño);
+                
+                if (this.fichas.Count() < 4)
+                {
+                    this.fichas.Add(ficha);
+                    this.ActualizarTablero(ficha);
 
-                this.fichas.Add(ficha);
+                }
+                else {
+                    System.Diagnostics.Debug.WriteLine("ENTRO ACA ESTA MIERDA");
+                    Validar validacion = new Validar(this.fichas,this.FilasTablero,this.ColumnasTablero);// hasta aca la validacion tiene su propio tablero de casillas y su propia lista
+                    validacion.Buscar(this.turnojugador);
+                    int encontro = 0;
+                    foreach (var item in validacion.listadePosibilidades())
+                    {
+                        System.Diagnostics.Debug.WriteLine("HAY POSIBILIDAD EN FILA: "+item.Fila+" COLUMNA: "+item.Columna);
+
+                        if (item.Fila==ficha.fila && item.Columna==ficha.columna) {
+                            encontro = 1;
+                        }
+
+
+                    }
+                    if (encontro!=0) {
+                        validacion.buscarFichaParaVoltear(ficha);
+                        this.fichas.Clear();
+                        foreach (var item in validacion.getFichasLocal())
+                        {
+                            this.fichas.Add(item);
+
+                        }
+
+                        this.fichas.Add(ficha);
+                        this.tablero[ficha.fila - 1, ficha.columna - 1].estado = "ocupado";
+                    }
+
+
+                    
+                }
+
+                
 
                 //this.fichas.Last().fila = fil;
                 //this.fichas.Last().columna = col;
-                this.ActualizarTablero(ficha);
+                
                 this.turnojugador = 2;
 
             } else if (this.turnojugador==2) {
@@ -84,17 +125,64 @@ namespace Proyecto_201700404.Clases
 
                 ficha.color = aux.color;
                 ficha.clase = aux.clase;
+                ficha.Turnodueño = aux.Turnodueño;
 
-                System.Diagnostics.Debug.WriteLine("Ficha COLOR: " + ficha.color + " CLASE: " + ficha.clase + " FILA: " + ficha.fila + " COLUMNA: " + ficha.columna);
+                //System.Diagnostics.Debug.WriteLine("Ficha COLOR: " + ficha.color + " CLASE: " + ficha.clase + " FILA: " + ficha.fila + " COLUMNA: " + ficha.columna + " TURNO DUEÑO: " + ficha.Turnodueño);
 
 
-                this.fichas.Add(ficha);
-                //this.fichas.Last().fila = fil;
-                //this.fichas.Last().columna = col;
-                this.ActualizarTablero(ficha);
+                //this.fichas.Add(ficha);
+                ////this.fichas.Last().fila = fil;
+                ////this.fichas.Last().columna = col;
+                //this.ActualizarTablero(ficha);
                 
+               
+
+                if (this.fichas.Count() < 4)
+                {
+                    this.fichas.Add(ficha);
+                    this.ActualizarTablero(ficha);
+
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("ENTRO ACA ESTA MIERDA");
+                    Validar validacion = new Validar(this.fichas, this.FilasTablero, this.ColumnasTablero);// hasta aca la validacion tiene su propio tablero de casillas y su propia lista
+                    validacion.Buscar(this.turnojugador);
+                    int encontro = 0;
+                    foreach (var item in validacion.listadePosibilidades())
+                    {
+                        System.Diagnostics.Debug.WriteLine("HAY POSIBILIDAD EN FILA: " + item.Fila + " COLUMNA: " + item.Columna);
+
+                        if (item.Fila == ficha.fila && item.Columna == ficha.columna)
+                        {
+                            encontro = 1;
+                        }
+
+
+                    }
+                    if (encontro != 0)
+                    {
+                        validacion.buscarFichaParaVoltear(ficha);
+                        this.fichas.Clear();
+                        foreach (var item in validacion.getFichasLocal())
+                        {
+                            this.fichas.Add(item);
+
+                        }
+
+                        this.fichas.Add(ficha);
+
+                        this.tablero[ficha.fila - 1, ficha.columna - 1].estado = "ocupado";
+                    }
+
+
+
+                }
                 this.turnojugador = 1;
+
+
             }
+            System.Diagnostics.Debug.WriteLine("LA LISTA DE FICHAS TIENE TAMAÑO ACTUALIZADO: " + this.fichas.Count());
         }
 
         public void ActualizarTablero(Ficha ficha) {

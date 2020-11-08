@@ -17,7 +17,7 @@ namespace Proyecto_201700404.Controllers
         public ActionResult Jugar(string idcelda) {
             if (idcelda == "tablero" || idcelda == null)
             {
-                System.Diagnostics.Debug.WriteLine("SIGUE PASANDO ACA ESTA COCHINADA");
+                //System.Diagnostics.Debug.WriteLine("SIGUE PASANDO ACA ESTA COCHINADA");
             }
             else {
                 char sep = '-';
@@ -26,7 +26,7 @@ namespace Proyecto_201700404.Controllers
                 int fil = int.Parse(datos[0]);
                 int colum = int.Parse(datos[1]);
 
-                System.Diagnostics.Debug.WriteLine("FILA: "+fil+"  COLUMNA:  "+colum);
+                //System.Diagnostics.Debug.WriteLine("FILA: "+fil+"  COLUMNA:  "+colum);
                 Variables.partida.PonerFicha(fil,colum);   
             }
 

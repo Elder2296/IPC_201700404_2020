@@ -136,6 +136,7 @@
     <Compile Include="Clases\Jugador.cs" />
     <Compile Include="Clases\Partida.cs" />
     <Compile Include="Clases\Posibilidad.cs" />
+    <Compile Include="Clases\Validar.cs" />
     <Compile Include="Clases\Variables.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ArchivoController.cs" />

@@ -48,65 +48,92 @@ namespace Proyecto_201700404.Controllers
         }
         [HttpPost]
         public ActionResult FichasHost(ColorFichaViewModel colorficha) {
-            iGamegtEntities1 db = new iGamegtEntities1();
+            if (ModelState.IsValid)
+            {
+                iGamegtEntities1 db = new iGamegtEntities1();
 
-            var col = (from d in db.ColorFicha where d.idcolor == colorficha.idcolor select d).FirstOrDefault();
+                var col = (from d in db.ColorFicha where d.idcolor == colorficha.idcolor select d).FirstOrDefault();
 
-            Ficha ficha = new Ficha();
-            ficha.color = col.color;
-            ficha.clase = col.clase;
-            int repetido = 0;
-            if (Variables.partida.JugadorLocal().puedoAgregarfichas()==true && Variables.partida.JugadorLocal().fichaRepetida(ficha)!=true) {
-                //si su lista es menor a 5 y que el color no sea repetido
-                foreach (var fichacontrincante in Variables.partida.JugadorInvitado().MisFichas())
+                Ficha ficha = new Ficha();
+                ficha.color = col.color;
+                ficha.clase = col.clase;
+                int repetido = 0;
+                if (Variables.partida.JugadorLocal().puedoAgregarfichas() == true && Variables.partida.JugadorLocal().fichaRepetida(ficha) != true)
                 {
-                    if (fichacontrincante.color==ficha.color) {
-                        repetido = 1;
+                    //si su lista es menor a 5 y que el color no sea repetido
+                    foreach (var fichacontrincante in Variables.partida.JugadorInvitado().MisFichas())
+                    {
+                        if (fichacontrincante.color == ficha.color)
+                        {
+                            repetido = 1;
+                        }
+
+                    }
+                    if (repetido == 0)
+                    {
+                        ficha.Turnodueño = 1;
+                        Variables.partida.JugadorLocal().MisFichas().Add(ficha);
                     }
 
-                }
-                if (repetido==0) {
-                    Variables.partida.JugadorLocal().MisFichas().Add(ficha);
-                }
 
-                
+
+                }
+                return RedirectToAction("RegistroFichas");
 
             }
-            System.Diagnostics.Debug.WriteLine("LAS FICHAS DEL JUGADOR LOCAL");
-
-            foreach (var item in Variables.partida.JugadorLocal().MisFichas())
-            {
-                System.Diagnostics.Debug.WriteLine("color: "+item.color+"  clase: "+item.clase);
-
+            else {
+                return RedirectToAction("RegistroFichas");
             }
+            
+            //System.Diagnostics.Debug.WriteLine("LAS FICHAS DEL JUGADOR LOCAL");
+
+            //foreach (var item in Variables.partida.JugadorLocal().MisFichas())
+            //{
+            //    System.Diagnostics.Debug.WriteLine("color: "+item.color+"  clase: "+item.clase);
+
+            //}
 
             //System.Diagnostics.Debug.WriteLine("COLORES DE HOST  "+col.color+" clase: "+col.clase);
-            return RedirectToAction("RegistroFichas");
+           
         }
         [HttpPost]
         public ActionResult FichasInvitado(ColorFichaViewModel colorficha)
         {
-            iGamegtEntities1 db = new iGamegtEntities1();
 
-            var col = (from d in db.ColorFicha where d.idcolor == colorficha.idcolor select d).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                iGamegtEntities1 db = new iGamegtEntities1();
 
-            Ficha ficha = new Ficha();
-            ficha.color = col.color;
-            ficha.clase = col.clase;
-            int repetido = 0;
-            if (Variables.partida.JugadorInvitado().puedoAgregarfichas()==true && Variables.partida.JugadorInvitado().fichaRepetida(ficha)!=true) {
-                foreach (var fichacontrincante in Variables.partida.JugadorLocal().MisFichas())
+                var col = (from d in db.ColorFicha where d.idcolor == colorficha.idcolor select d).FirstOrDefault();
+
+                Ficha ficha = new Ficha();
+                ficha.color = col.color;
+                ficha.clase = col.clase;
+                int repetido = 0;
+                if (Variables.partida.JugadorInvitado().puedoAgregarfichas() == true && Variables.partida.JugadorInvitado().fichaRepetida(ficha) != true)
                 {
-                    if (fichacontrincante.color==ficha.color) {
-                        repetido = 1;
-                    }
+                    foreach (var fichacontrincante in Variables.partida.JugadorLocal().MisFichas())
+                    {
+                        if (fichacontrincante.color == ficha.color)
+                        {
+                            repetido = 1;
+                        }
 
+                    }
+                    if (repetido == 0)
+                    {
+                        ficha.Turnodueño = 2;
+
+                        Variables.partida.JugadorInvitado().MisFichas().Add(ficha);
+                    }
                 }
-                if (repetido==0) {
-                    Variables.partida.JugadorInvitado().MisFichas().Add(ficha);
-                }
+                return RedirectToAction("RegistroFichas");
+
             }
-            return RedirectToAction("RegistroFichas");
+            else {
+                return RedirectToAction("RegistroFichas");
+            }   
+           
         }
 
 
