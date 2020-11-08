@@ -36,6 +36,10 @@ namespace Proyecto_201700404.Clases
                     this.posibilidadXIzquierda(item);
                     this.posibilidadXAbajo(item);
                     this.posibilidadXArriba(item);
+                    this.diagonalDerechaInferior(item);
+                    this.diagonalIzquierdaInferior(item);
+                    this.diagonalSuperiorDerecha(item);
+                    this.diagonalSuperiorIzquierda(item);
                 }
 
             }
@@ -201,6 +205,317 @@ namespace Proyecto_201700404.Clases
 
             }
         }
+
+        public void diagonalDerechaInferior(Ficha fichaelegida) {
+            int auxfila = fichaelegida.fila - 1;
+            int auxcol = fichaelegida.columna - 1;
+            int frenar = 1;
+            Posibilidad posibilidad = new Posibilidad();
+
+            for (int i = 0; i < this.filas; i++)
+            {
+                for (int j = 0; j < this.columnas; j++)
+                {
+                    if (i>auxfila & j>auxcol) {
+                        if ((i-auxfila)==1 && (j-auxcol)==1) {
+                            auxfila = i;
+                            auxcol = j;
+                        }
+
+                        if (this.tablero[i, j].estado == "desocupado")
+                        {
+                            frenar = 0;
+                            break;
+                        }
+                        else {
+                            if (fichaelegida.Turnodueño == this.buscarFicha(i, j).Turnodueño)
+                            {
+                                frenar = 0;
+                                break;
+                            }
+                            else {
+                                posibilidad.getLista().Add(this.buscarFicha(i,j));
+
+                                if ((i+1)<this.filas && (j+1)<this.columnas) {
+                                    if (this.tablero[i+1,j+1].estado=="desocupado") {
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i + 2;
+                                        posibilidad.Columna = j + 2;
+                                        this.lista_posibilidades.Add(posibilidad);
+                                        frenar = 0;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            
+                        }
+                    }
+
+                }
+                if (frenar!=1) {
+                    break;
+                }
+
+            }
+        }
+
+        public void diagonalIzquierdaInferior(Ficha fichaelegida)
+        {
+            int auxfila = fichaelegida.fila - 1;
+            int auxcol = fichaelegida.columna - 1;
+            int frenar = 1;
+            //Console.WriteLine("PASO ACA");
+            Posibilidad posibilidad = new Posibilidad();
+
+            for (int i = 0; i < this.filas; i++)
+            {
+                for (int j = (this.columnas-1); j >= 0; j--)
+                {
+                    if (i > auxfila && j < auxcol)
+                    {
+
+                        if ((i - auxfila) == 1 && (j - auxcol) == -1)
+                        {
+                            auxfila = i;
+                            auxcol = j;
+                        }
+
+
+                        if (this.tablero[i,j].estado == "desocupado")
+                        {
+                            frenar = 2;
+                            break;
+                        }
+                        else 
+                        {
+                            if (fichaelegida.Turnodueño == this.buscarFicha(i, j).Turnodueño)
+                            {
+                                frenar = 2;
+                                break;
+                            }
+                            else
+                            {
+
+                                posibilidad.getLista().Add(this.buscarFicha(i, j));
+
+                                if ((i + 1) < this.filas && (j - 1) >= 0)
+                                {
+
+                                    if ( this.tablero[i + 1, j - 1].estado == "desocupado")
+                                    {
+                                        //Console.WriteLine(" paso aca entro a fila: " + i + "  columna: " + j);
+
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i + 2;
+                                        posibilidad.Columna = j;
+                                        lista_posibilidades.Add(posibilidad);
+                                        frenar = 2;
+                                        break;
+
+
+                                    }
+
+
+                                }
+
+
+                            }
+
+                        }
+
+
+
+                    }
+
+                }
+                if (frenar != 1)
+                {
+                    break;
+                }
+
+            }
+
+        }
+
+
+
+        public void diagonalSuperiorDerecha(Ficha fichaelegida)
+        {
+            int auxfila = fichaelegida.fila - 1;
+            int auxcol = fichaelegida.columna - 1;
+            int frenar = 1;
+            Posibilidad posibilidad = new Posibilidad();
+
+            for (int i = (this.filas-1); i >= 0; i--)
+            {
+                for (int j = 0; j < this.columnas; j++)
+                {
+                    if (i < auxfila && j > auxcol)
+                    {
+
+                        if ((i - auxfila) == -1 && (j - auxcol) == 1)
+                        {
+                            auxcol = j;
+                            auxfila = i;
+                        }
+
+
+
+
+                        if (this.tablero[i, j].estado == "desocupado")
+                        {
+                            frenar = 2;
+                            break;
+                        }
+                        else
+                        {
+                            if (fichaelegida.Turnodueño == this.buscarFicha(i, j).Turnodueño)
+                            {
+                                frenar = 2;
+                                break;
+
+                            }
+                            else 
+                            {
+                                //Console.WriteLine(" paso aca entro a fila: " + i + "  columna: " + j);
+                                posibilidad.getLista().Add(this.buscarFicha(i, j));
+
+                                if ((i - 1) >= 0 && (j + 1) < this.columnas)
+                                {
+                                    if ( this.tablero[i - 1, j + 1].estado == "desocupado")
+                                    {
+
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i;
+                                        posibilidad.Columna = j + 2;
+                                        lista_posibilidades.Add(posibilidad);
+                                        frenar = 2;
+                                        break;
+
+                                    }
+
+
+
+                                }
+
+
+
+                            }
+
+                        }
+
+
+
+
+
+                    }
+
+
+                }
+                if (frenar != 1)
+                {
+                    break;
+                }
+
+            }
+
+
+
+        }
+
+
+
+
+
+        public void diagonalSuperiorIzquierda(Ficha fichaelegida)
+        {
+            int auxfil = fichaelegida.fila - 1;
+            int auxcol = fichaelegida.columna - 1;
+            int frenar = 1;
+            Posibilidad posibilidad = new Posibilidad();
+            for (int i = (this.filas-1); i >= 0; i--)
+            {
+                for (int j = (this.columnas-1); j >= 0; j--)
+                {
+                    if (i < auxfil && j < auxcol)
+                    {
+
+                        if ((i - auxfil) == -1 && (j - auxcol) == -1)
+                        {
+                            auxfil = i;
+                            auxcol = j;
+                        }
+
+                        if (this.tablero[i, j].estado == "desocupado")
+                        {
+                            frenar = 2;
+                            break;
+                        }
+                        else 
+                        {
+                            if (fichaelegida.Turnodueño == this.buscarFicha(i, j).Turnodueño)
+                            {
+                                frenar = 2;
+                                break;
+                            }
+                            else 
+                            {
+
+                                posibilidad.getLista().Add(this.buscarFicha(i, j));
+
+
+                                if ((i - 1) >= 0 && (j - 1) >= 0)
+                                {
+                                    if ( this.tablero[i - 1, j - 1].estado == "desocupado")
+                                    {
+
+                                        posibilidad.origen = fichaelegida;
+                                        posibilidad.Fila = i;
+                                        posibilidad.Columna = j;
+                                        lista_posibilidades.Add(posibilidad);
+                                        frenar = 2;
+                                        break;
+
+                                    }
+
+
+
+                                }
+
+                            }
+                           
+                        }
+
+
+                    }
+
+
+
+                }
+                if (frenar != 1)
+                {
+                    break;
+                }
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void buscarFichaParaVoltear(Ficha fichaelegida)
         {//la ficha que se coloco, pertenece a las posibilidades de juego
             foreach (var item in this.lista_posibilidades)
